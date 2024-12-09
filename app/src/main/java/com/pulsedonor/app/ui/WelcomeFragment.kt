@@ -2,9 +2,8 @@ package com.pulsedonor.app.ui
 
 import androidx.lifecycle.ViewModelProvider
 import android.view.LayoutInflater
-import android.widget.Toast
 import com.pulsedonor.app.base.fragment.BaseFragment
-import com.pulsedonor.app.base.viewmodel.AppNameViewModelFactory
+import com.pulsedonor.app.base.viewmodel.PulseDonorViewModelFactory
 import com.pulsedonor.app.data.AppPreferences
 import com.pulsedonor.app.databinding.WelcomeFragmentBinding
 import javax.inject.Inject
@@ -17,7 +16,7 @@ class WelcomeFragment : BaseFragment<WelcomeFragmentBinding>() {
     @Inject
     lateinit var appPreferences: AppPreferences
     @Inject
-    lateinit var viewModelFactory: AppNameViewModelFactory
+    lateinit var viewModelFactory: PulseDonorViewModelFactory
     override fun initViews() {
         viewModel = ViewModelProvider(this, viewModelFactory)[WelcomeViewModel::class.java]
 

@@ -2,7 +2,7 @@ package com.pulsedonor.app.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.pulsedonor.app.base.viewmodel.AppNameViewModelFactory
+import com.pulsedonor.app.base.viewmodel.PulseDonorViewModelFactory
 import com.pulsedonor.app.di.annotation.ViewModelKey
 import com.pulsedonor.app.ui.MainViewModel
 import com.pulsedonor.app.ui.WelcomeViewModel
@@ -25,6 +25,6 @@ abstract class ViewModelModule {
     abstract fun bindWelcomeViewModel(welcomeViewModel: WelcomeViewModel): ViewModel
 //    /**baseFactory for all [ViewModel]*/
     @Binds
-    abstract fun bindViewModelFactory(factory: AppNameViewModelFactory): ViewModelProvider.Factory
+    abstract fun bindViewModelFactory(factory: PulseDonorViewModelFactory): ViewModelProvider.Factory
 
 }

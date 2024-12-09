@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_solid_white_top_right_left_radius_20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_margin="20dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabBackground="@drawable/viewpager_indicators"
+            app:tabGravity="center"
+            app:tabIndicatorHeight="0dp"
+            app:tabMaxWidth="15dp" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+       android:layout_margin="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+        android:background="@drawable/bg_stroke_cl_primary_radius_12dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:gravity="center"
+        android:paddingVertical="15dp"
+        android:text="@string/sign_up"
+        android:textAllCaps="false"
+        android:textColor="@color/primary"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btnLogin"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_solid_cl_primary_radius_12dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:paddingVertical="15dp"
+            android:text="@string/sign_in"
+            android:textAllCaps="false"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/btnRegister"
+            app:layout_constraintEnd_toEndOf="@id/btnRegister"
+            app:layout_constraintStart_toStartOf="@id/btnRegister" />
+
+        <Button
+            android:id="@+id/btnContinuasGuest"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:fontFamily="@font/poppins_semibold"
+            android:paddingVertical="15dp"
+            android:text="@string/continue_as_guest"
+            android:textAllCaps="false"
+            android:gravity="center"
+            android:textColor="@color/primary50"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/btnLogin"
+            app:layout_constraintEnd_toEndOf="@id/btnLogin"
+            app:layout_constraintStart_toStartOf="@id/btnLogin" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

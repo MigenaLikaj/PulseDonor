@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">PulseDonor</string>
+    <string name="sign_up">Krijo llogari</string>
+    <string name="sign_in">Kyçuni</string>
+    <string name="continue_as_guest">Vazhdo pa llogari</string>
+    <string name="firstname">Emri</string>
+    <string name="lastname">Mbiemri</string>
+    <string name="password">Passwordi</string>
+    <string name="forgot_password">Keni harruar fjalekalimin?</string>
+    <string name="back">Kthehu</string>
 </resources>

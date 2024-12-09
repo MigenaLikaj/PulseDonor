@@ -1,16 +1,72 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.Interviews" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+<resources>
+    <style name="Theme.PulseDonor" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/black</item>
         <item name="colorOnPrimary">@color/black</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        <item name="colorAccent">@color/black</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="colorControlNormal">@color/primary</item>
+        <item name="android:datePickerStyle">@style/Theme.MyTheme.DatePicker</item>
+    </style>
+
+    <style name="FullScreenActivityTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryVariant">@color/black</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorAccent">@color/black</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="colorControlNormal">@color/primary</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:datePickerStyle">@style/Theme.MyTheme.DatePicker</item>
+    </style>
+
+    <style name="Theme.MyTheme.DatePicker" parent="android:Widget.Material.Light.DatePicker">
+        <item name="android:datePickerMode">spinner</item>
+        <item name="android:textColorPrimary">@color/primary</item>
+        <item name="android:paddingStart">25dp</item>
+        <item name="android:paddingEnd">25dp</item>
+        <item name="android:paddingTop">25dp</item>
+    </style>
+
+    <style name="TextInputLayoutHintText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/sf_pro_display_medium</item>
+    </style>
+
+    <style name="CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxCollapsedPaddingTop">-20dp</item>
+        <item name="android:paddingTop">20dp</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+    </style>
+
+    <style name="CustomTextEditText">
+        <item name="android:padding">15dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/sf_pro_display_medium</item>
+    </style>
+
+    <style name="Theme.Switch" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@color/primary</item>
+        <item name="colorSwitchThumbNormal">#f1f1f1</item>
+        <item name="android:colorForeground">@color/white</item>
+    </style>
+
+    <style name="FullScreenTransparentDialogStyle" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="statusBarBackground">@color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/transparent</item>
     </style>
 </resources>
