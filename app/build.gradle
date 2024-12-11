@@ -152,4 +152,9 @@ dependencies {
 
     //lottie animations
     implementation "com.airbnb.android:lottie:6.0.0"
+
+    // phone number libraries
+    implementation 'com.googlecode.libphonenumber:libphonenumber:8.12.56'
+    implementation 'com.hbb20:ccp:2.6.1'
+
 }

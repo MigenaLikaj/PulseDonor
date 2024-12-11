@@ -12,6 +12,7 @@ import com.pulsedonor.app.data.AppPreferences
 import com.pulsedonor.app.databinding.IntroductionActivityBinding
 import com.pulsedonor.app.models.introduction.IntroductionModel
 import com.pulsedonor.app.ui.oboarding.signin.SignInActivity
+import com.pulsedonor.app.ui.oboarding.signup.SignUpActivity
 import javax.inject.Inject
 
 class IntroductionActivity : BaseActivity<IntroductionActivityBinding>() {
@@ -65,7 +66,6 @@ class IntroductionActivity : BaseActivity<IntroductionActivityBinding>() {
             }
         })
     }
-
     private fun openActivity(activity: Activity) {
         val intent = Intent(this, activity::class.java)
         startActivity(intent)
@@ -79,7 +79,7 @@ class IntroductionActivity : BaseActivity<IntroductionActivityBinding>() {
         }
 
         binding.btnRegister.setOnClickListener {
-//            openActivity(SignUpActivity())
+            openActivity(SignUpActivity())
         }
     }
 }

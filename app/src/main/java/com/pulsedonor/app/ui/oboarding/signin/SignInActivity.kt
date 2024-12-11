@@ -1,5 +1,7 @@
 package com.pulsedonor.app.ui.oboarding.signin
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.activity.enableEdgeToEdge
@@ -11,6 +13,8 @@ import com.pulsedonor.app.base.activity.BaseActivity
 import com.pulsedonor.app.base.viewmodel.PulseDonorViewModelFactory
 import com.pulsedonor.app.data.AppPreferences
 import com.pulsedonor.app.databinding.SignInActivityBinding
+import com.pulsedonor.app.ui.oboarding.signup.SignUpActivity
+import com.pulsedonor.app.utilities.openActivity
 import javax.inject.Inject
 
 class SignInActivity : BaseActivity<SignInActivityBinding>() {
@@ -35,6 +39,9 @@ class SignInActivity : BaseActivity<SignInActivityBinding>() {
         binding.tvBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
-    }
 
+        binding.tvSignUp.setOnClickListener {
+            openActivity(this, SignUpActivity())
+        }
+    }
 }

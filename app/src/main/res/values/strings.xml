@@ -5,10 +5,14 @@
     <string name="continue_as_guest">Vazhdo pa llogari</string>
     <string name="firstname">Emri</string>
     <string name="lastname">Mbiemri</string>
+    <string name="blood_group">Grupi i gjakut</string>
+    <string name="city">Qyteti</string>
+    <string name="phone_number">Telefoni</string>
     <string name="email">Email</string>
-    <string name="password">Password</string>
+    <string name="password">Passwordi</string>
     <string name="forgot_password">Keni harruar fjalekalimin?</string>
     <string name="register_now">Nuk keni ende llogari? Regjistrohuni tani.</string>
+    <string name="login_now">Keni llogari? Kyçuni tani.</string>
     <string name="back">Kthehu</string>
     <string name="app_moto">Dhuro gjak, shpëto jetë. \n Fuqia për të shpëtuar jetë është në duart tuaja – bëhuni ndryshimi.</string>
     <string name="signin_description">Kyçuni për të shpëtuar jetë. Qasuni profileve tuaja dhe ndihmoni komunitetin tuaj të sigurojë gjak kur ka nevojë.</string>
