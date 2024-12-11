@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".ui.onboarding.signin.SignInActivity">
+    android:background="@color/white">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -32,15 +31,18 @@
                     android:id="@+id/tvBack"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="28dp"
-                    android:layout_marginTop="70dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="45dp"
                     android:drawablePadding="6dp"
                     android:fontFamily="@font/poppins_medium"
                     android:gravity="center"
                     android:padding="10dp"
+                    android:includeFontPadding="false"
                     android:text="@string/back"
+                    android:drawableStart="@drawable/back_icon"
+                    android:drawableTint="@color/primary"
                     android:textColor="@color/primary50"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -48,13 +50,13 @@
                     android:id="@+id/linearLayout2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="28dp"
+                    android:layout_marginHorizontal="25dp"
                     android:gravity="center"
                     android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/btn_sign_in"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toBottomOf="@+id/tvBack">
 
                     <TextView
                         android:id="@+id/tvLogin"
@@ -64,15 +66,25 @@
                         android:gravity="center"
                         android:text="@string/sign_in"
                         android:textColor="@color/primary"
-                        android:textSize="32sp" />
+                        android:textSize="38sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="center"
+                        android:text="@string/signin_description"
+                        android:textColor="@color/cl_a2a2a2"
+                        android:textSize="12sp" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/til_email"
+                        android:id="@+id/tilEmail"
                         style="@style/CustomTextInputLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="40dp"
-                        android:hint="@string/firstname"
+                        android:layout_marginTop="25dp"
+                        android:hint="@string/email"
                         android:textColorHint="@color/cl_c8c5c3"
                         app:hintTextAppearance="@style/TextInputLayoutHintText"
                         app:hintTextColor="@color/cl_c8c5c3">
@@ -83,6 +95,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/bg_general_stroke_input_fields"
+                            android:drawableStart="@drawable/email_icon"
+                            android:drawablePadding="7dp"
                             android:fontFamily="@font/sf_pro_display_medium"
                             android:inputType="textEmailAddress"
                             android:maxLines="1"
@@ -108,11 +122,23 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/bg_general_stroke_input_fields"
+                            android:drawableStart="@drawable/lock_icon"
+                            android:drawablePadding="7dp"
                             android:fontFamily="@font/sf_pro_display_medium"
                             android:inputType="textPassword"
                             android:maxLines="1"
                             android:singleLine="true" />
                     </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/poppins"
+                        android:gravity="end"
+                        android:text="@string/forgot_password"
+                        android:textColor="@color/cl_a2a2a2"
+                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <Button
@@ -129,7 +155,7 @@
                     android:text="@string/sign_in"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     app:layout_constraintBottom_toTopOf="@+id/tvForgotPassword"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -143,9 +169,9 @@
                     android:fontFamily="@font/sf_pro_display_medium"
                     android:gravity="center"
                     android:padding="10dp"
-                    android:text="@string/forgot_password"
+                    android:text="@string/register_now"
                     android:textColor="@color/primary50"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/btn_sign_in"
                     app:layout_constraintStart_toStartOf="@+id/btn_sign_in" />
