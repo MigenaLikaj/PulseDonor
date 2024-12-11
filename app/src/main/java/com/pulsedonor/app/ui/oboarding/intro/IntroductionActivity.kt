@@ -40,14 +40,14 @@ class IntroductionActivity : BaseActivity<IntroductionActivityBinding>() {
     private fun fillIntroData() {
         val list = arrayListOf(
             IntroductionModel(
-                R.drawable.intro_1
+                R.drawable.intro1
             ),
             IntroductionModel(
-                R.drawable.intro_2
+                R.drawable.intro2
 
             ),
             IntroductionModel(
-                R.drawable.intro_3
+                R.drawable.intro3
             )
         )
         introductionAdapter.submitList(list)
