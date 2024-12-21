@@ -14,47 +14,49 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/tvBack"
-                    android:layout_width="0dp"
+                <ImageView
+                    android:id="@+id/ivBack"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="17dp"
-                    android:layout_marginTop="45dp"
-                    android:drawablePadding="6dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:includeFontPadding="false"
-                    android:text="@string/back"
-                    android:textColor="@color/primary50"
-                    android:textSize="12sp"
-                    app:drawableStartCompat="@drawable/back_icon"
-                    app:drawableTint="@color/primary"
+                    android:layout_marginTop="55dp"
+                    android:paddingVertical="10dp"
+                    android:paddingEnd="20dp"
+                    android:src="@drawable/back_icon"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <ImageView
+                    android:id="@+id/ivAppIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/app_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ivBack"/>
 
                 <TextView
                     android:id="@+id/tvSignUp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="28dp"
-                    android:layout_marginTop="40dp"
-                    android:fontFamily="@font/poppins_bold"
-                    android:gravity="center"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/poppins_semibold"
                     android:includeFontPadding="false"
                     android:text="@string/sign_up"
-                    android:textColor="@color/primary"
-                    android:textSize="38sp"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvBack" />
+                    app:layout_constraintTop_toBottomOf="@id/ivAppIcon" />
 
                 <TextView
                     android:id="@+id/tvSignUpDesc"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_medium"
-                    android:gravity="center"
                     android:layout_marginTop="10dp"
                     android:text="@string/signup_description"
                     android:textColor="@color/cl_a2a2a2"
@@ -133,29 +135,6 @@
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/tilBloodGroup"
-                            style="@style/CustomTextInputLayout"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:hint="@string/blood_group"
-                            android:textColorHint="@color/cl_c8c5c3"
-                            app:hintTextAppearance="@style/TextInputLayoutHintText"
-                            app:hintTextColor="@color/cl_c8c5c3">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/etBloodGroup"
-                                style="@style/CustomTextEditText"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/bg_general_stroke_input_fields"
-                                android:fontFamily="@font/sf_pro_display_medium"
-                                android:inputType="text"
-                                android:maxLines="1"
-                                android:singleLine="true" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/tilEmail"
                             style="@style/CustomTextInputLayout"
                             android:layout_width="match_parent"
@@ -197,7 +176,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bg_general_stroke_input_fields"
-                                android:drawableStart="@drawable/location_icon"
+                                android:drawableStart="@drawable/location_input_icon"
                                 android:drawablePadding="7dp"
                                 android:fontFamily="@font/sf_pro_display_medium"
                                 android:inputType="text"
@@ -276,6 +255,31 @@
                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/tilBloodGroup"
+                            style="@style/CustomTextInputLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:hint="@string/blood_group"
+                            android:textColorHint="@color/cl_c8c5c3"
+                            app:hintTextAppearance="@style/TextInputLayoutHintText"
+                            app:hintTextColor="@color/cl_c8c5c3">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etBloodGroup"
+                                style="@style/CustomTextEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_general_stroke_input_fields"
+                                android:drawableStart="@drawable/blood_input_icon"
+                                android:drawablePadding="7dp"
+                                android:fontFamily="@font/sf_pro_display_medium"
+                                android:inputType="text"
+                                android:maxLines="1"
+                                android:singleLine="true" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/tilPassword"
                             style="@style/CustomTextInputLayout"
                             android:layout_width="match_parent"
@@ -331,7 +335,7 @@
                     android:padding="10dp"
                     android:layout_marginBottom="20dp"
                     android:text="@string/login_now"
-                    android:textColor="@color/primary50"
+                    android:textColor="@color/black"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/btnSignUp"

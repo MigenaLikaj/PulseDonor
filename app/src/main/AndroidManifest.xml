@@ -17,6 +17,12 @@
             android:name=".ui.oboarding.signup.SignUpActivity"
             android:exported="false"
             android:theme="@style/FullScreenActivityTheme" />
+
+        <activity
+            android:name=".ui.oboarding.forgot_password.ForgotPasswordActivity"
+            android:exported="false"
+            android:theme="@style/FullScreenActivityTheme" />
+
         <activity
             android:name=".ui.oboarding.intro.IntroductionActivity"
             android:exported="false"

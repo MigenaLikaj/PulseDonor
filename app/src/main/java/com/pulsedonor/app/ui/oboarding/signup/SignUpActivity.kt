@@ -40,7 +40,7 @@ class SignUpActivity : BaseActivity<SignUpActivityBinding>() {
     }
 
     override fun onClicks() {
-        binding.tvBack.setOnClickListener {
+        binding.ivBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
 

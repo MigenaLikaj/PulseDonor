@@ -27,54 +27,56 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/tvBack"
-                    android:layout_width="0dp"
+                <ImageView
+                    android:id="@+id/ivBack"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="17dp"
-                    android:layout_marginTop="45dp"
-                    android:drawablePadding="6dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:gravity="center"
+                    android:layout_marginTop="60dp"
                     android:padding="10dp"
-                    android:includeFontPadding="false"
-                    android:text="@string/back"
-                    android:drawableStart="@drawable/back_icon"
-                    android:drawableTint="@color/primary"
-                    android:textColor="@color/primary50"
-                    android:textSize="12sp"
+                    android:src="@drawable/back_icon"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <ImageView
+                    android:id="@+id/ivAppIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/app_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ivBack"/>
 
                 <LinearLayout
                     android:id="@+id/linearLayout2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="25dp"
+                    android:layout_marginBottom="20dp"
                     android:gravity="center"
                     android:orientation="vertical"
-                    app:layout_constraintBottom_toTopOf="@+id/btn_sign_in"
+                    app:layout_constraintBottom_toTopOf="@+id/tvSignUp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvBack">
+                    app:layout_constraintTop_toBottomOf="@+id/ivAppIcon">
 
                     <TextView
                         android:id="@+id/tvLogin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_bold"
-                        android:gravity="center"
+                        android:fontFamily="@font/poppins_semibold"
                         android:includeFontPadding="false"
                         android:text="@string/sign_in"
-                        android:textColor="@color/primary"
-                        android:textSize="38sp" />
+                        android:textColor="@color/black"
+                        android:textSize="25sp" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/poppins_medium"
-                        android:gravity="center"
                         android:text="@string/signin_description"
                         android:textColor="@color/cl_a2a2a2"
                         android:textSize="12sp" />
@@ -132,6 +134,7 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
+                        android:id="@+id/tvForgotPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -140,26 +143,22 @@
                         android:text="@string/forgot_password"
                         android:textColor="@color/cl_a2a2a2"
                         android:textSize="12sp" />
-                </LinearLayout>
 
-                <Button
-                    android:id="@+id/btn_sign_in"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                   android:layout_marginHorizontal="28dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/bg_solid_cl_primary_radius_12dp"
-                    android:fontFamily="@font/sf_pro_display_semibold"
-                    android:gravity="center"
-                    android:padding="15dp"
-                    android:text="@string/sign_in"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="13sp"
-                    app:layout_constraintBottom_toTopOf="@+id/tvSignUp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    <Button
+                        android:id="@+id/btn_sign_in"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="50dp"
+                        android:background="@drawable/bg_solid_cl_primary_radius_12dp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:padding="15dp"
+                        android:text="@string/sign_in"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="13sp" />
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/tvSignUp"
@@ -167,15 +166,15 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginBottom="20dp"
-                    android:fontFamily="@font/sf_pro_display_medium"
+                    android:fontFamily="@font/poppins"
                     android:gravity="center"
                     android:padding="10dp"
                     android:text="@string/register_now"
-                    android:textColor="@color/primary50"
+                    android:textColor="@color/black"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/btn_sign_in"
-                    app:layout_constraintStart_toStartOf="@+id/btn_sign_in" />
+                    app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
+                    app:layout_constraintStart_toStartOf="@+id/linearLayout2" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

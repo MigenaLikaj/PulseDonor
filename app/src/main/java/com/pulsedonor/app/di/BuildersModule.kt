@@ -2,6 +2,7 @@ package com.pulsedonor.app.di
 
 import com.pulsedonor.app.di.modules.MainActivityModule
 import com.pulsedonor.app.ui.MainActivity
+import com.pulsedonor.app.ui.oboarding.forgot_password.ForgotPasswordActivity
 import com.pulsedonor.app.ui.oboarding.intro.IntroductionActivity
 import com.pulsedonor.app.ui.oboarding.signin.SignInActivity
 import com.pulsedonor.app.ui.oboarding.signup.SignUpActivity
@@ -25,5 +26,8 @@ abstract class BuildersModule {
 
     @ContributesAndroidInjector()
     internal abstract fun bindIntroductionActivity(): IntroductionActivity
+
+    @ContributesAndroidInjector()
+    internal abstract fun bindForgotPasswordActivity(): ForgotPasswordActivity
 
 }
