@@ -1,14 +1,317 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.dashboard.profile.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clMainContentHolder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:includeFontPadding="false"
+                android:text="@string/profile"
+                android:textColor="@color/black"
+                android:layout_marginTop="60dp"
+                android:layout_marginHorizontal="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textSize="25sp" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvProfile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:elevation="1dp"
+                app:cardElevation="1dp"
+                app:cardBackgroundColor="#FCF2F2"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintStart_toStartOf="@id/tvProfile"
+                app:layout_constraintEnd_toEndOf="@id/tvProfile"
+                app:layout_constraintTop_toBottomOf="@id/tvProfile">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cvProfilePic"
+                            android:layout_width="54dp"
+                            android:layout_height="54dp"
+                            android:layout_margin="13dp"
+                            android:scaleType="centerCrop"
+                            app:cardCornerRadius="27dp"
+                            app:cardElevation="2dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/ivUserProfilePic"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:contentDescription="@null"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/empty_profile" />
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:id="@+id/tvUserName"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:includeFontPadding="false"
+                            android:text="Migena Likaj"
+                            android:layout_marginHorizontal="10dp"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            app:layout_constraintEnd_toStartOf="@id/ivPencil"
+                            app:layout_constraintBottom_toBottomOf="@+id/cvProfilePic"
+                            app:layout_constraintStart_toEndOf="@id/cvProfilePic"
+                            app:layout_constraintTop_toTopOf="@+id/cvProfilePic" />
+
+                        <ImageView
+                            android:id="@+id/ivPencil"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@null"
+                            android:layout_marginEnd="13dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:src="@drawable/pencil_icon" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:elevation="1dp"
+                app:cardElevation="1dp"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintStart_toStartOf="@id/cvProfile"
+                app:layout_constraintEnd_toEndOf="@id/cvProfile"
+                app:layout_constraintTop_toBottomOf="@id/cvProfile"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/ivOverview"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:contentDescription="@null"
+                                android:scaleType="centerCrop"
+                                android:layout_margin="18dp"
+                                android:src="@drawable/overview_icon"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/tvOverview"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:includeFontPadding="false"
+                            android:text="Overview"
+                            android:layout_marginHorizontal="15dp"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            app:layout_constraintEnd_toStartOf="@id/ivNext"
+                            app:layout_constraintBottom_toBottomOf="@+id/ivOverview"
+                            app:layout_constraintStart_toEndOf="@id/ivOverview"
+                            app:layout_constraintTop_toTopOf="@+id/ivOverview" />
+
+                        <ImageView
+                            android:id="@+id/ivNext"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@null"
+                            android:layout_marginEnd="13dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:src="@drawable/next_icon" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--                  postimet e mija-->
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/ivMyPosts"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@null"
+                            android:scaleType="centerCrop"
+                            android:layout_margin="18dp"
+                            android:src="@drawable/posts_icon"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/tvMyPosts"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:includeFontPadding="false"
+                            android:text="Postimet e mija"
+                            android:layout_marginHorizontal="15dp"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            app:layout_constraintEnd_toStartOf="@id/ivNext1"
+                            app:layout_constraintBottom_toBottomOf="@+id/ivMyPosts"
+                            app:layout_constraintStart_toEndOf="@id/ivMyPosts"
+                            app:layout_constraintTop_toTopOf="@+id/ivMyPosts" />
+
+                        <ImageView
+                            android:id="@+id/ivNext1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@null"
+                            android:layout_marginEnd="13dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:src="@drawable/next_icon" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--                    Lista e dhurimeve-->
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/ivDonations"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@null"
+                            android:scaleType="centerCrop"
+                            android:layout_margin="18dp"
+                            android:src="@drawable/list_icon"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/tvDonations"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:includeFontPadding="false"
+                            android:text="Lista e dhurimeve"
+                            android:layout_marginHorizontal="15dp"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            app:layout_constraintEnd_toStartOf="@id/ivNext2"
+                            app:layout_constraintBottom_toBottomOf="@+id/ivDonations"
+                            app:layout_constraintStart_toEndOf="@id/ivDonations"
+                            app:layout_constraintTop_toTopOf="@+id/ivDonations" />
+
+                        <ImageView
+                            android:id="@+id/ivNext2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@null"
+                            android:layout_marginEnd="13dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:src="@drawable/next_icon" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--                    aplikimet-->
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/ivAplications"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@null"
+                            android:scaleType="centerCrop"
+                            android:layout_margin="18dp"
+                            android:src="@drawable/aplication_icon"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/tvAplications"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:includeFontPadding="false"
+                            android:text="Aplikimet"
+                            android:layout_marginHorizontal="15dp"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            app:layout_constraintEnd_toStartOf="@id/ivNext3"
+                            app:layout_constraintBottom_toBottomOf="@+id/ivAplications"
+                            app:layout_constraintStart_toEndOf="@id/ivAplications"
+                            app:layout_constraintTop_toTopOf="@+id/ivAplications" />
+
+                        <ImageView
+                            android:id="@+id/ivNext3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@null"
+                            android:layout_marginEnd="13dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:src="@drawable/next_icon" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
