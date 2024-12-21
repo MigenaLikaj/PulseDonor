@@ -1,18 +1,11 @@
 package com.pulsedonor.app.ui.oboarding.signin
 
-import android.app.Activity
-import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.pulsedonor.app.R
 import com.pulsedonor.app.base.activity.BaseActivity
 import com.pulsedonor.app.base.viewmodel.PulseDonorViewModelFactory
 import com.pulsedonor.app.data.AppPreferences
 import com.pulsedonor.app.databinding.SignInActivityBinding
+import com.pulsedonor.app.ui.dashboard.DashboardActivity
 import com.pulsedonor.app.ui.oboarding.forgot_password.ForgotPasswordActivity
 import com.pulsedonor.app.ui.oboarding.signup.SignUpActivity
 import com.pulsedonor.app.utilities.openActivity
@@ -47,6 +40,10 @@ class SignInActivity : BaseActivity<SignInActivityBinding>() {
 
         binding.tvForgotPassword.setOnClickListener {
             openActivity(this, ForgotPasswordActivity())
+        }
+
+        binding.btnSignIn.setOnClickListener {
+            openActivity(this, DashboardActivity())
         }
     }
 }
