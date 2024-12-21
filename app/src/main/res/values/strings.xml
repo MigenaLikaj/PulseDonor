@@ -28,6 +28,10 @@
     <string name="update_pass">Përditëso fjalëkalimin</string>
     <string name="email_verification">Verifikimi me email</string>
     <string name="send_code">Dërgo kodin</string>
+    <string name="home">Kryefaqja</string>
+    <string name="profile">Profili</string>
+    <string name="map">Harta</string>
+    <string name="hall_of_fame">Hall of fame</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

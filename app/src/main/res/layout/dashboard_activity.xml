@@ -57,6 +57,7 @@
                     android:layout_width="34dp"
                     android:layout_height="34dp"
                     android:padding="5dp"
+                    app:tint="@color/primary"
                     android:src="@drawable/home_off_icon" />
 
                 <TextView
@@ -66,7 +67,7 @@
                     android:fontFamily="@font/sf_pro_display_medium"
                     android:gravity="center"
                     android:maxLines="1"
-                    android:text="Home"
+                    android:text="@string/home"
                     android:textColor="@color/black"
                     android:textSize="12dp" />
             </LinearLayout>
@@ -99,7 +100,7 @@
                     android:gravity="center"
                     android:maxLines="1"
                     android:layout_marginTop="2dp"
-                    android:text="Hall of fame"
+                    android:text="@string/hall_of_fame"
                     android:textColor="@color/black"
                     android:textSize="12dp" />
             </LinearLayout>
@@ -130,7 +131,7 @@
                     android:fontFamily="@font/sf_pro_display_medium"
                     android:gravity="center"
                     android:maxLines="1"
-                    android:text="Map"
+                    android:text="@string/map"
                     android:textColor="@color/black"
                     android:textSize="12dp" />
             </LinearLayout>
@@ -171,7 +172,7 @@
                     android:gravity="center"
                     android:maxLines="1"
                     android:layout_marginTop="4dp"
-                    android:text="Profili"
+                    android:text="@string/profile"
                     android:textColor="@color/black"
                     android:textSize="12dp" />
             </LinearLayout>

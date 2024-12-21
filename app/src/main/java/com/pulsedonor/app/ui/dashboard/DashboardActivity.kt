@@ -1,6 +1,8 @@
 package com.pulsedonor.app.ui.dashboard
 
+import android.graphics.PorterDuff
 import android.view.LayoutInflater
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.pulsedonor.app.R
@@ -101,18 +103,19 @@ class DashboardActivity : BaseActivity<DashboardActivityBinding>() {
     }
 
     fun customizeUIOnClick(activeFragment: ActiveFragment) {
-        binding.ivHome.setImageResource(R.drawable.home_off_icon)
-        binding.ivHallOfFame.setImageResource(R.drawable.hall_of_fame_off_icon)
         binding.ivMap.setImageResource(R.drawable.map_off_icon)
         binding.ivProfile.setImageResource(R.drawable.profile_off_icon)
+        binding.ivHome.setColorFilter(ContextCompat.getColor(this, R.color.cl_afafaf), PorterDuff.Mode.SRC_IN)
+        binding.ivHallOfFame.setColorFilter(ContextCompat.getColor(this, R.color.cl_afafaf), PorterDuff.Mode.SRC_IN)
+
 
         when (activeFragment) {
             ActiveFragment.HomeFragment -> {
-                binding.ivHome.setImageResource(R.drawable.home_off_icon)
+                binding.ivHome.setColorFilter(ContextCompat.getColor(this, R.color.primary), PorterDuff.Mode.SRC_IN)
             }
 
             ActiveFragment.HallOfFameFragment -> {
-                binding.ivHallOfFame.setImageResource(R.drawable.hall_of_fame_off_icon)
+                binding.ivHallOfFame.setColorFilter(ContextCompat.getColor(this, R.color.primary), PorterDuff.Mode.SRC_IN)
             }
 
             ActiveFragment.MapFragment -> {
