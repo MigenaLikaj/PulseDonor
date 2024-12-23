@@ -1,12 +1,10 @@
 package com.pulsedonor.app.ui.dashboard
 
-import android.graphics.PorterDuff
 import android.view.LayoutInflater
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import com.pulsedonor.app.R
-import androidx.fragment.app.commit
 import com.pulsedonor.app.base.activity.BaseActivity
 import com.pulsedonor.app.base.viewmodel.PulseDonorViewModelFactory
 import com.pulsedonor.app.data.AppPreferences
@@ -21,6 +19,7 @@ import javax.inject.Inject
 enum class ActiveFragment {
     HomeFragment, HallOfFameFragment, MapFragment, ProfileFragment
 }
+
 class DashboardActivity : BaseActivity<DashboardActivityBinding>() {
     override fun inflateBinding(layoutInflater: LayoutInflater): DashboardActivityBinding =
         DashboardActivityBinding.inflate(layoutInflater)
@@ -103,19 +102,18 @@ class DashboardActivity : BaseActivity<DashboardActivityBinding>() {
     }
 
     fun customizeUIOnClick(activeFragment: ActiveFragment) {
+        binding.ivHome.setImageResource(R.drawable.home_off_icon)
         binding.ivMap.setImageResource(R.drawable.map_off_icon)
         binding.ivProfile.setImageResource(R.drawable.profile_off_icon)
-        binding.ivHome.setColorFilter(ContextCompat.getColor(this, R.color.cl_afafaf), PorterDuff.Mode.SRC_IN)
-        binding.ivHallOfFame.setColorFilter(ContextCompat.getColor(this, R.color.cl_afafaf), PorterDuff.Mode.SRC_IN)
-
+        binding.ivHallOfFame.setImageResource(R.drawable.hall_of_fame_off_icon)
 
         when (activeFragment) {
             ActiveFragment.HomeFragment -> {
-                binding.ivHome.setColorFilter(ContextCompat.getColor(this, R.color.primary), PorterDuff.Mode.SRC_IN)
+                binding.ivHome.setImageResource(R.drawable.home_on_icon)
             }
 
             ActiveFragment.HallOfFameFragment -> {
-                binding.ivHallOfFame.setColorFilter(ContextCompat.getColor(this, R.color.primary), PorterDuff.Mode.SRC_IN)
+                binding.ivHallOfFame.setImageResource(R.drawable.hall_of_fame_on_icon)
             }
 
             ActiveFragment.MapFragment -> {

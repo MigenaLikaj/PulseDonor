@@ -34,6 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:paddingTop="7dp"
             android:paddingBottom="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -56,50 +57,51 @@
                     android:id="@+id/ivHome"
                     android:layout_width="34dp"
                     android:layout_height="34dp"
-                    android:padding="5dp"
-                    app:tint="@color/primary"
-                    android:src="@drawable/home_off_icon" />
+                    android:padding="3dp"
+                    android:src="@drawable/home_on_icon" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
                     android:ellipsize="end"
                     android:fontFamily="@font/sf_pro_display_medium"
                     android:gravity="center"
+                    android:includeFontPadding="false"
                     android:maxLines="1"
                     android:text="@string/home"
                     android:textColor="@color/black"
-                    android:textSize="12dp" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/llHallOfFame"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="5dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/llHome"
                 app:layout_constraintEnd_toStartOf="@id/llMap"
                 app:layout_constraintStart_toEndOf="@id/llHome"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/llHome"
                 tools:visibility="visible">
 
                 <ImageView
                     android:id="@+id/ivHallOfFame"
                     android:layout_width="34dp"
                     android:layout_height="34dp"
-                    android:padding="5dp"
+                    android:padding="3dp"
                     android:src="@drawable/hall_of_fame_off_icon" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:ellipsize="end"
                     android:fontFamily="@font/sf_pro_display_medium"
                     android:gravity="center"
+                    android:includeFontPadding="false"
                     android:maxLines="1"
-                    android:layout_marginTop="2dp"
                     android:text="@string/hall_of_fame"
                     android:textColor="@color/black"
                     android:textSize="12dp" />
@@ -108,70 +110,68 @@
             <LinearLayout
                 android:id="@+id/llMap"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="5dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/llHallOfFame"
                 app:layout_constraintEnd_toStartOf="@+id/llProfile"
                 app:layout_constraintStart_toEndOf="@+id/llHallOfFame"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="@+id/llHallOfFame">
 
                 <ImageView
                     android:id="@+id/ivMap"
                     android:layout_width="34dp"
                     android:layout_height="34dp"
-                    android:padding="5dp"
+                    android:padding="3dp"
                     android:src="@drawable/map_off_icon" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
                     android:ellipsize="end"
                     android:fontFamily="@font/sf_pro_display_medium"
                     android:gravity="center"
+                    android:includeFontPadding="false"
                     android:maxLines="1"
                     android:text="@string/map"
                     android:textColor="@color/black"
-                    android:textSize="12dp" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/llProfile"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="7dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/llMap"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/llMap"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="@+id/llMap">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <ImageView
+                    android:id="@+id/ivProfile"
                     android:layout_width="34dp"
-                    android:layout_height="34dp">
-
-                    <ImageView
-                        android:id="@+id/ivProfile"
-                        android:layout_width="34dp"
-                        android:layout_height="34dp"
-                        android:padding="7dp"
-                        android:src="@drawable/profile_off_icon"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_height="34dp"
+                    android:padding="5dp"
+                    android:src="@drawable/profile_off_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:ellipsize="end"
                     android:fontFamily="@font/sf_pro_display_medium"
                     android:gravity="center"
+                    android:includeFontPadding="false"
                     android:maxLines="1"
-                    android:layout_marginTop="4dp"
                     android:text="@string/profile"
                     android:textColor="@color/black"
                     android:textSize="12dp" />
