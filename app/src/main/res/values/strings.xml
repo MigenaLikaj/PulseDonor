@@ -32,6 +32,12 @@
     <string name="profile">Profili</string>
     <string name="map">Harta</string>
     <string name="hall_of_fame">Hall of fame</string>
+    <string name="overview">Përmbledhje</string>
+    <string name="my_posts">Postimet e mija</string>
+    <string name="donations_list">Lista e dhurimeve</string>
+    <string name="aplications">Aplikimet</string>
+    <string name="security">Siguria</string>
+    <string name="logout">Dil nga llogaria</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
