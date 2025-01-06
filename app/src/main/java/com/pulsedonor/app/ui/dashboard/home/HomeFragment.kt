@@ -1,10 +1,14 @@
 package com.pulsedonor.app.ui.dashboard.home
 
 import android.view.LayoutInflater
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayoutMediator
 import com.pulsedonor.app.base.fragment.BaseFragment
 import com.pulsedonor.app.databinding.HomeFragmentBinding
 
 class HomeFragment : BaseFragment<HomeFragmentBinding>() {
+
+    private lateinit var vpAdapter: ViewPagerHome
 
     override fun inflateBinding(layoutInflater: LayoutInflater): HomeFragmentBinding =
         HomeFragmentBinding.inflate(layoutInflater)
@@ -13,9 +17,43 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>() {
     }
 
     override fun initViews() {
+        initTabLayoutAndViewPager()
     }
 
     override fun onClicks() {
+    }
+
+    private fun initTabLayoutAndViewPager() {
+        vpAdapter = ViewPagerHome(childFragmentManager, lifecycle)
+        binding.vpRanking.adapter = vpAdapter
+        TabLayoutMediator(
+            binding.tabLayout,
+            binding.vpRanking
+        ) { currentTab, currentPosition ->
+            currentTab.text = when (currentPosition) {
+                0 -> {
+                    "Postet"
+                }
+
+                1 -> {
+                    "Aplikimet"
+                }
+
+                else -> ""
+            }
+
+        }.attach()
+        // disable viewpager to swiping
+        binding.vpRanking.isUserInputEnabled = false
+        binding.vpRanking.registerOnPageChangeCallback(onPageChanged)
+    }
+
+    var selectedTab = 1
+    private val onPageChanged = object : ViewPager2.OnPageChangeCallback() {
+        override fun onPageSelected(position: Int) {
+            super.onPageSelected(position)
+            selectedTab = position + 1
+        }
     }
 
 }
