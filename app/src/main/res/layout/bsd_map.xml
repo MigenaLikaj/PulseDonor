@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clBsdPin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/BottomSheetDialogTheme"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_solid_white_top_right_left_radius_20dp"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/tvDetails"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="start"
+                    android:text="Detajet"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="7dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvDetails">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="3dp"
+                        android:background="@drawable/bg_solid_cl_primary_radius_12dp"
+                        android:backgroundTint="@color/white"
+                        android:elevation="3dp"
+                        android:padding="13dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cvOverview"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:elevation="0dp"
+                            app:cardBackgroundColor="#FCF2F2"
+                            app:cardCornerRadius="15dp"
+                            app:cardElevation="0dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView3"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/tvOverview" />
+
+                        <ImageView
+                            android:id="@+id/ivOverview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@null"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/location_input_icon"
+                            app:layout_constraintBottom_toBottomOf="@id/cvOverview"
+                            app:layout_constraintEnd_toEndOf="@+id/cvOverview"
+                            app:layout_constraintStart_toStartOf="@id/cvOverview"
+                            app:layout_constraintTop_toTopOf="@id/cvOverview"
+                            app:tint="@color/primary" />
+
+                        <TextView
+                            android:id="@+id/tvOverview"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="15dp"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/poppins_medium"
+                            android:includeFontPadding="false"
+                            android:maxLines="1"
+                            android:text="Emri"
+                            android:textColor="#9D9D9D"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/cvOverview"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="15dp"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/poppins_medium"
+                            android:includeFontPadding="false"
+                            android:maxLines="1"
+                            android:text="Detajet e Qendres"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/cvOverview"
+                            app:layout_constraintTop_toBottomOf="@id/tvOverview" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="3dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/bg_solid_cl_primary_radius_12dp"
+                        android:backgroundTint="@color/white"
+                        android:elevation="3dp"
+                        android:padding="13dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cvAddress"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:elevation="0dp"
+                            app:cardBackgroundColor="#FCF2F2"
+                            app:cardCornerRadius="15dp"
+                            app:cardElevation="0dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView4"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/tvAddress" />
+
+                        <ImageView
+                            android:id="@+id/ivAddress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@null"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/location_input_icon"
+                            app:layout_constraintBottom_toBottomOf="@id/cvAddress"
+                            app:layout_constraintEnd_toEndOf="@+id/cvAddress"
+                            app:layout_constraintStart_toStartOf="@id/cvAddress"
+                            app:layout_constraintTop_toTopOf="@id/cvAddress"
+                            app:tint="@color/primary" />
+
+                        <TextView
+                            android:id="@+id/tvAddress"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="15dp"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/poppins_medium"
+                            android:includeFontPadding="false"
+                            android:maxLines="1"
+                            android:text="Adresa"
+                            android:textColor="#9D9D9D"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/cvAddress"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="15dp"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/poppins_medium"
+                            android:includeFontPadding="false"
+                            android:maxLines="1"
+                            android:text="2972 Westheimer Rd. Santa Ana, Illinois 85486 "
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/cvAddress"
+                            app:layout_constraintTop_toBottomOf="@id/tvAddress" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="3dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/bg_solid_cl_primary_radius_12dp"
+                        android:backgroundTint="@color/white"
+                        android:elevation="3dp"
+                        android:padding="13dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cvSchedule"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:elevation="0dp"
+                            app:cardBackgroundColor="#FCF2F2"
+                            app:cardCornerRadius="15dp"
+                            app:cardElevation="0dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/tvSchedule" />
+
+                        <ImageView
+                            android:id="@+id/ivSchedule"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@null"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/overview_icon"
+                            app:layout_constraintBottom_toBottomOf="@id/cvSchedule"
+                            app:layout_constraintEnd_toEndOf="@+id/cvSchedule"
+                            app:layout_constraintStart_toStartOf="@id/cvSchedule"
+                            app:layout_constraintTop_toTopOf="@id/cvSchedule" />
+
+                        <TextView
+                            android:id="@+id/tvSchedule"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="15dp"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/poppins_medium"
+                            android:includeFontPadding="false"
+                            android:maxLines="1"
+                            android:text="Orari"
+                            android:textColor="#9D9D9D"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/cvSchedule"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="15dp"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/poppins_medium"
+                            android:includeFontPadding="false"
+                            android:maxLines="1"
+                            android:text="03:00PM (Max 20 min)"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/cvSchedule"
+                            app:layout_constraintTop_toBottomOf="@id/tvSchedule" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <Button
+                        android:id="@+id/btnOpenWithGoogleMaps"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/bg_solid_cl_primary_radius_12dp"
+                        android:backgroundTint="@color/primary50"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:padding="15dp"
+                        android:text="Hape me Google Maps"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

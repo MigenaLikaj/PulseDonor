@@ -1,11 +1,16 @@
 package com.pulsedonor.app.ui.dashboard.map
 
 import android.Manifest
+import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
+import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
-import android.widget.Toast
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -16,16 +21,21 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.pulsedonor.app.R
 import com.pulsedonor.app.base.fragment.BaseFragment
+import com.pulsedonor.app.databinding.BsdMapBinding
 import com.pulsedonor.app.databinding.MapFragmentBinding
 import java.util.Locale
+
 
 class MapFragment : BaseFragment<MapFragmentBinding>(), OnMapReadyCallback {
 
     private lateinit var map: GoogleMap
     private val TAG = MapFragment::class.java.simpleName
     private val REQUEST_LOCATION_PERMISSION = 1
+    lateinit var bsdMap: BottomSheetDialog
 
     override fun inflateBinding(layoutInflater: LayoutInflater): MapFragmentBinding =
         MapFragmentBinding.inflate(layoutInflater)
@@ -82,11 +92,7 @@ class MapFragment : BaseFragment<MapFragmentBinding>(), OnMapReadyCallback {
 
     private fun setPoiClick(map: GoogleMap) {
         map.setOnMarkerClickListener { marker ->
-            Toast.makeText(
-                requireContext(),
-                "Clicked on marker",
-                Toast.LENGTH_SHORT
-            ).show()
+            bsdMap()
             false
         }
     }
@@ -151,5 +157,37 @@ class MapFragment : BaseFragment<MapFragmentBinding>(), OnMapReadyCallback {
                 enableMyLocation()
             }
         }
+    }
+
+    private fun bsdMap() {
+        bsdMap = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+        val inflater = LayoutInflater.from(requireContext())
+        val bindingBsd: BsdMapBinding = BsdMapBinding.inflate(inflater)
+        bsdMap.setContentView(bindingBsd.root)
+        bsdMap.setOnShowListener {
+            val bottom_sheet = bsdMap.findViewById<ConstraintLayout>(R.id.clBsdPin)
+            BottomSheetBehavior.from(bottom_sheet!!).setState(BottomSheetBehavior.STATE_EXPANDED)
+        }
+
+        bindingBsd.clBsdPin.setOnClickListener {
+            hideSoftKeyboardBottomSheet(it)
+        }
+
+        bindingBsd.btnOpenWithGoogleMaps.setOnClickListener {
+            val latitude = "42.654237"
+            val longitude = "21.162691"
+            val uri = "https://www.google.com.tw/maps/place/$latitude,$longitude"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+            startActivity(intent)
+            bsdMap.dismiss()
+        }
+        bsdMap.show()
+    }
+
+    fun hideSoftKeyboardBottomSheet(view: View) {
+        (requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(
+            view.windowToken,
+            0
+        )
     }
 }
