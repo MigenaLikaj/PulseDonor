@@ -71,4 +71,18 @@
         <item name="android:textAllCaps">false</item>
     </style>
 
+    <style name="Theme.Switch" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">#6f9e4b</item>
+        <item name="colorSwitchThumbNormal">#f1f1f1
+        </item>
+        <item name="android:colorForeground">@color/white</item>
+    </style>
+
+    <style name="Theme.Switch_Blue" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">#6f9e4b</item>
+        <item name="colorSwitchThumbNormal">#f1f1f1
+        </item>
+        <item name="android:colorForeground">@color/white</item>
+    </style>
+
 </resources>

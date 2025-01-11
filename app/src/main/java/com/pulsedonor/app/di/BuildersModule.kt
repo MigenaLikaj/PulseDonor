@@ -2,6 +2,9 @@ package com.pulsedonor.app.di
 
 import com.pulsedonor.app.di.modules.DashboardActivityModule
 import com.pulsedonor.app.ui.dashboard.DashboardActivity
+import com.pulsedonor.app.ui.dashboard.profile.DonationsActivity
+import com.pulsedonor.app.ui.dashboard.profile.MyPostsActivity
+import com.pulsedonor.app.ui.dashboard.profile.ProfileActivity
 import com.pulsedonor.app.ui.oboarding.forgot_password.ForgotPasswordActivity
 import com.pulsedonor.app.ui.oboarding.intro.IntroductionActivity
 import com.pulsedonor.app.ui.oboarding.signin.SignInActivity
@@ -29,4 +32,13 @@ abstract class BuildersModule {
 
     @ContributesAndroidInjector()
     internal abstract fun bindForgotPasswordActivity(): ForgotPasswordActivity
+
+    @ContributesAndroidInjector()
+    internal abstract fun bindDonationsActivity(): DonationsActivity
+
+    @ContributesAndroidInjector()
+    internal abstract fun bindMyPostsActivity(): MyPostsActivity
+
+    @ContributesAndroidInjector()
+    internal abstract fun bindProfileActivity(): ProfileActivity
 }

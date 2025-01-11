@@ -15,6 +15,18 @@
         android:theme="@style/Theme.PulseDonor"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.dashboard.profile.DonationsActivity"
+            android:exported="false"
+            android:theme="@style/FullScreenActivityTheme" />
+        <activity
+            android:name=".ui.dashboard.profile.MyPostsActivity"
+            android:exported="false"
+            android:theme="@style/FullScreenActivityTheme" />
+        <activity
+            android:name=".ui.dashboard.profile.ProfileActivity"
+            android:exported="false"
+            android:theme="@style/FullScreenActivityTheme" />
+        <activity
             android:name=".ui.dashboard.notifications.NotificationsActivity"
             android:exported="false" />
         <activity
@@ -56,7 +68,6 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_api_key" />

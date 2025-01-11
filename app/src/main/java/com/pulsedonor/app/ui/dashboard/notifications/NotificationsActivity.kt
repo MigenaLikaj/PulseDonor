@@ -1,21 +1,20 @@
 package com.pulsedonor.app.ui.dashboard.notifications
 
-import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.pulsedonor.app.R
+import android.view.LayoutInflater
+import com.pulsedonor.app.base.activity.BaseActivity
+import com.pulsedonor.app.databinding.NotificationsActivityBinding
 
-class NotificationsActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.notifications_activity)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+class NotificationsActivity : BaseActivity<NotificationsActivityBinding>() {
+    override fun inflateBinding(layoutInflater: LayoutInflater): NotificationsActivityBinding =
+        NotificationsActivityBinding.inflate(layoutInflater)
+
+    override fun initViews() {
     }
+
+    override fun observeViewModel() {
+    }
+
+    override fun onClicks() {
+    }
+
 }
