@@ -1,20 +1,13 @@
 package com.pulsedonor.app.ui.oboarding.signup
 
-import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.hbb20.CountryCodePicker
 import com.pulsedonor.app.R
 import com.pulsedonor.app.base.activity.BaseActivity
 import com.pulsedonor.app.base.viewmodel.PulseDonorViewModelFactory
 import com.pulsedonor.app.data.AppPreferences
-import com.pulsedonor.app.databinding.SignInActivityBinding
 import com.pulsedonor.app.databinding.SignUpActivityBinding
 import com.pulsedonor.app.ui.oboarding.signin.SignInActivity
 import com.pulsedonor.app.utilities.openActivity
@@ -33,7 +26,6 @@ class SignUpActivity : BaseActivity<SignUpActivityBinding>() {
         SignUpActivityBinding.inflate(layoutInflater)
 
     override fun initViews() {
-
     }
 
     override fun observeViewModel() {
@@ -45,7 +37,7 @@ class SignUpActivity : BaseActivity<SignUpActivityBinding>() {
         }
 
         binding.tvSignIn.setOnClickListener {
-        openActivity(this, SignInActivity())
+            openActivity(this, SignInActivity())
         }
 
         binding.ccp.registerCarrierNumberEditText(binding.etPhoneNumber)

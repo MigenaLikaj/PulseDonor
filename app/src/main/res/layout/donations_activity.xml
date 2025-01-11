@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/ivAppIcon"
+        android:id="@+id/tvDonations"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/sofia"
@@ -30,5 +30,40 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ivBack" />
+
+    <RelativeLayout
+        android:id="@+id/rlDonationsList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="13dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDonations">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvDonations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvDonationsListEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="Lista e dhurimeve është e zbrazët!"
+        android:textColor="#a2a2a2"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDonations"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

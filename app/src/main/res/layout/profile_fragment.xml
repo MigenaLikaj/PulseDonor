@@ -256,7 +256,8 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/clAplications"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:visibility="gone">
 
                         <androidx.cardview.widget.CardView
                             android:id="@+id/cvAplications"
@@ -314,7 +315,7 @@
 
                     <!--                    //security-->
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/clSecurity"
+                        android:id="@+id/clChangePassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -352,7 +353,7 @@
                             android:fontFamily="@font/poppins_medium"
                             android:includeFontPadding="false"
                             android:maxLines="1"
-                            android:text="@string/security"
+                            android:text="Ndrysho fjalëkalimin"
                             android:textColor="@color/black"
                             android:textSize="14sp"
                             app:layout_constraintBottom_toBottomOf="@+id/cvSecurity"

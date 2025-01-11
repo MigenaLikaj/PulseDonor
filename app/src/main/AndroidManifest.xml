@@ -15,6 +15,10 @@
         android:theme="@style/Theme.PulseDonor"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.dashboard.profile.ChangePasswordActivity"
+            android:exported="false"
+            android:theme="@style/FullScreenActivityTheme" />
+        <activity
             android:name=".ui.dashboard.profile.DonationsActivity"
             android:exported="false"
             android:theme="@style/FullScreenActivityTheme" />

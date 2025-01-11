@@ -45,5 +45,9 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding>() {
         binding.clMyPosts.setOnClickListener {
             startActivity(Intent(requireContext(), MyPostsActivity::class.java))
         }
+
+        binding.clChangePassword.setOnClickListener {
+            startActivity(Intent(requireContext(), ChangePasswordActivity::class.java))
+        }
     }
 }
