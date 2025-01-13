@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.pulsedonor.app">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission
+        android:name="android.permission.ACCESS_FINE_LOCATION"
+        tools:ignore="CoarseFineLocation" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -14,6 +17,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PulseDonor"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ui.dashboard.profile.PostDetailsActivity"
+            android:exported="false"
+            android:theme="@style/FullScreenActivityTheme" />
         <activity
             android:name=".ui.dashboard.profile.ChangePasswordActivity"
             android:exported="false"

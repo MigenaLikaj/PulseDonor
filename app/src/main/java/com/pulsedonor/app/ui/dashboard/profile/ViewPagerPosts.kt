@@ -1,11 +1,11 @@
-package com.pulsedonor.app.ui.dashboard.home
+package com.pulsedonor.app.ui.dashboard.profile
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class ViewPagerHome(
+class ViewPagerPosts(
     fragmentManager: FragmentManager,
     lifecycle: Lifecycle
 ) :
@@ -15,8 +15,8 @@ class ViewPagerHome(
 
     override fun createFragment(position: Int): Fragment =
         when (position) {
-            0 -> HomePostsFragment()
-            1 -> HomeApplicationsFragment()
+            0 -> PostsOverviewFragment()
+            1 -> PostsApplicationsFragment()
             else -> throw IllegalStateException("Invalid adapter position")
         }
 }

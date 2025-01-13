@@ -1,7 +1,7 @@
 package com.pulsedonor.app.di.modules
 
 import com.pulsedonor.app.ui.dashboard.hall_of_fame.HallOfFameFragment
-import com.pulsedonor.app.ui.dashboard.home.HomeAplicationsFragment
+import com.pulsedonor.app.ui.dashboard.home.HomeApplicationsFragment
 import com.pulsedonor.app.ui.dashboard.home.HomeFragment
 import com.pulsedonor.app.ui.dashboard.home.HomePostsFragment
 import com.pulsedonor.app.ui.dashboard.map.MapFragment
@@ -28,5 +28,5 @@ abstract class DashboardActivityModule {
     internal abstract fun bindHomePostsFragment(): HomePostsFragment
 
     @ContributesAndroidInjector
-    internal abstract fun bindHomeAplicationsFragment(): HomeAplicationsFragment
+    internal abstract fun bindHomeAplicationsFragment(): HomeApplicationsFragment
 }

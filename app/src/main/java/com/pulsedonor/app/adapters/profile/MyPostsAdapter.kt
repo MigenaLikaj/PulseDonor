@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pulsedonor.app.databinding.PostsListItemBinding
 import com.pulsedonor.app.models.introduction.DonationsResponse
 
-class MyPostsAdapter :
+class MyPostsAdapter(val listener: Listener) :
     ListAdapter<DonationsResponse, RecyclerView.ViewHolder>(DiffCallback()) {
 
     init {
@@ -45,6 +45,10 @@ class MyPostsAdapter :
             binding.tvUrgency.text = item.urgency
             binding.tvHospital.text = item.hospital
             binding.tvDateTime.text = item.dateTime
+
+            binding.root.setOnClickListener {
+                listener.onPostClicked()
+            }
         }
     }
 
@@ -61,5 +65,9 @@ class MyPostsAdapter :
         ): Boolean {
             return oldItem == newItem
         }
+    }
+
+    interface Listener {
+        fun onPostClicked()
     }
 }

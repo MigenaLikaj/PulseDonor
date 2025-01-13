@@ -1,5 +1,6 @@
 package com.pulsedonor.app.ui.dashboard.profile
 
+import android.content.Intent
 import android.view.LayoutInflater
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,7 +13,7 @@ import com.pulsedonor.app.models.introduction.DonationsResponse
 import com.pulsedonor.app.ui.MainViewModel
 import javax.inject.Inject
 
-class MyPostsActivity : BaseActivity<MyPostsActivityBinding>() {
+class MyPostsActivity : BaseActivity<MyPostsActivityBinding>(), MyPostsAdapter.Listener {
     override fun inflateBinding(layoutInflater: LayoutInflater): MyPostsActivityBinding =
         MyPostsActivityBinding.inflate(layoutInflater)
 
@@ -27,17 +28,14 @@ class MyPostsActivity : BaseActivity<MyPostsActivityBinding>() {
     lateinit var viewModelFactory: PulseDonorViewModelFactory
 
     override fun initViews() {
-        // Initialize the ViewModel
         viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
 
-        // Set up the adapter
-        myPostsAdapter = MyPostsAdapter()
+        myPostsAdapter = MyPostsAdapter(this)
         binding.rvPosts.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = myPostsAdapter
         }
 
-        // Populate the donations list with sample data
         donationsList = arrayListOf(
             DonationsResponse("O+", "500 ml", "High", "University Hospital", "10/01/2025 - 14:30"),
             DonationsResponse("A-", "350 ml", "Medium", "General Hospital", "11/01/2025 - 12:00"),
@@ -48,19 +46,19 @@ class MyPostsActivity : BaseActivity<MyPostsActivityBinding>() {
             DonationsResponse("B-", "500 ml", "Low", "Health Center", "05/01/2025 - 15:00"),
             DonationsResponse("AB+", "350 ml", "High", "Downtown Clinic", "04/01/2025 - 09:00")
         )
-
-        // Submit the list to the adapter
         myPostsAdapter.submitList(donationsList)
     }
 
     override fun observeViewModel() {
-        // Observe ViewModel LiveData or other reactive data here if needed
     }
 
     override fun onClicks() {
-        // Handle back button click
         binding.ivBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
+    }
+
+    override fun onPostClicked() {
+        startActivity(Intent(this, PostDetailsActivity::class.java))
     }
 }

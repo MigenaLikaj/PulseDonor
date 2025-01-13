@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import com.pulsedonor.app.base.fragment.BaseFragment
 import com.pulsedonor.app.databinding.HomeAplicationsFragmentBinding
 
-class HomeAplicationsFragment : BaseFragment<HomeAplicationsFragmentBinding>() {
+class HomeApplicationsFragment : BaseFragment<HomeAplicationsFragmentBinding>() {
 
     override fun inflateBinding(layoutInflater: LayoutInflater): HomeAplicationsFragmentBinding =
         HomeAplicationsFragmentBinding.inflate(layoutInflater)

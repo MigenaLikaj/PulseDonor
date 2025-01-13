@@ -1,10 +1,12 @@
 package com.pulsedonor.app.di
 
 import com.pulsedonor.app.di.modules.DashboardActivityModule
+import com.pulsedonor.app.di.modules.ProfileActivityModule
 import com.pulsedonor.app.ui.dashboard.DashboardActivity
 import com.pulsedonor.app.ui.dashboard.profile.ChangePasswordActivity
 import com.pulsedonor.app.ui.dashboard.profile.DonationsActivity
 import com.pulsedonor.app.ui.dashboard.profile.MyPostsActivity
+import com.pulsedonor.app.ui.dashboard.profile.PostDetailsActivity
 import com.pulsedonor.app.ui.dashboard.profile.ProfileActivity
 import com.pulsedonor.app.ui.oboarding.forgot_password.ForgotPasswordActivity
 import com.pulsedonor.app.ui.oboarding.intro.IntroductionActivity
@@ -18,6 +20,9 @@ import dagger.android.ContributesAndroidInjector
 abstract class BuildersModule {
     @ContributesAndroidInjector(modules = [DashboardActivityModule::class])
     internal abstract fun bindDashboardActivity(): DashboardActivity
+
+    @ContributesAndroidInjector(modules = [ProfileActivityModule::class])
+    internal abstract fun bindPostDetailsActivity(): PostDetailsActivity
 
     @ContributesAndroidInjector()
     internal abstract fun bindSignInActivity(): SignInActivity
@@ -41,8 +46,8 @@ abstract class BuildersModule {
     internal abstract fun bindMyPostsActivity(): MyPostsActivity
 
     @ContributesAndroidInjector()
-    internal abstract fun bindProfileActivity(): ProfileActivity
+    internal abstract fun bindChangePasswordActivity(): ChangePasswordActivity
 
     @ContributesAndroidInjector()
-    internal abstract fun bindChangePasswordActivity(): ChangePasswordActivity
+    internal abstract fun bindProfileActivity(): ProfileActivity
 }
