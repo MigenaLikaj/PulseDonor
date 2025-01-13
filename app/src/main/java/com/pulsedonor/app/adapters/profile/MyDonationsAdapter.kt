@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.pulsedonor.app.databinding.DonationsListItemBinding
-import com.pulsedonor.app.models.introduction.DonationsResponse
+import com.pulsedonor.app.models.profile.DonationsResponse
 
 class MyDonationsAdapter :
     ListAdapter<DonationsResponse, RecyclerView.ViewHolder>(DiffCallback()) {

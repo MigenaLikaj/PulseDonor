@@ -8,7 +8,7 @@ import com.pulsedonor.app.base.activity.BaseActivity
 import com.pulsedonor.app.base.viewmodel.PulseDonorViewModelFactory
 import com.pulsedonor.app.data.AppPreferences
 import com.pulsedonor.app.databinding.DonationsActivityBinding
-import com.pulsedonor.app.models.introduction.DonationsResponse
+import com.pulsedonor.app.models.profile.DonationsResponse
 import com.pulsedonor.app.ui.MainViewModel
 import javax.inject.Inject
 
@@ -26,17 +26,14 @@ class DonationsActivity : BaseActivity<DonationsActivityBinding>() {
     lateinit var viewModelFactory: PulseDonorViewModelFactory
 
     override fun initViews() {
-        // Initialize the ViewModel
         viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
 
-        // Set up the adapter
         myDonationsAdapter = MyDonationsAdapter()
         binding.rvDonations.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = myDonationsAdapter
         }
 
-        // Populate the donations list with sample data
         donationsList = arrayListOf(
             DonationsResponse("O+", "500 ml", "High", "University Hospital", "10/01/2025 - 14:30"),
             DonationsResponse("A-", "350 ml", "Medium", "General Hospital", "11/01/2025 - 12:00"),
@@ -48,16 +45,13 @@ class DonationsActivity : BaseActivity<DonationsActivityBinding>() {
             DonationsResponse("AB+", "350 ml", "High", "Downtown Clinic", "04/01/2025 - 09:00")
         )
 
-        // Submit the list to the adapter
         myDonationsAdapter.submitList(donationsList)
     }
 
     override fun observeViewModel() {
-        // Observe ViewModel LiveData or other reactive data here if needed
     }
 
     override fun onClicks() {
-        // Handle back button click
         binding.ivBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }

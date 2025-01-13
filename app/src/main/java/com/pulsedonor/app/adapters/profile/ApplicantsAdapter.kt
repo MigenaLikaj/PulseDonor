@@ -6,21 +6,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.pulsedonor.app.databinding.PostsListItemBinding
-import com.pulsedonor.app.models.profile.DonationsResponse
+import com.pulsedonor.app.databinding.ApplicantsItemBinding
+import com.pulsedonor.app.models.profile.ApplicantsResponse
 
-class MyPostsAdapter(val listener: Listener) :
-    ListAdapter<DonationsResponse, RecyclerView.ViewHolder>(DiffCallback()) {
+class ApplicantsAdapter :
+    ListAdapter<ApplicantsResponse, RecyclerView.ViewHolder>(DiffCallback()) {
 
     init {
         hasStableIds()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val binding = PostsListItemBinding.inflate(
+        val binding = ApplicantsItemBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
-        return PostsItemViewHolder(binding)
+        return ApplicantionsItemViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
@@ -32,42 +32,33 @@ class MyPostsAdapter(val listener: Listener) :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as PostsItemViewHolder).bind(getItem(position) as DonationsResponse)
+        (holder as ApplicantionsItemViewHolder).bind(getItem(position) as ApplicantsResponse)
     }
 
-    inner class PostsItemViewHolder(val binding: PostsListItemBinding) :
+    inner class ApplicantionsItemViewHolder(val binding: ApplicantsItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("NotifyDataSetChanged", "SimpleDateFormat")
-        fun bind(item: DonationsResponse) = with(itemView) {
+        fun bind(item: ApplicantsResponse) = with(itemView) {
 
+            binding.tvFullName.text = item.fullName
+            binding.tvEmail.text = item.email
+            binding.tvPhoneNumber.text = item.phoneNumber
             binding.tvBloodGroup.text = item.bloodGroup
-            binding.tvQuantity.text = item.quantity
-            binding.tvUrgency.text = item.urgency
-            binding.tvHospital.text = item.hospital
-            binding.tvDateTime.text = item.dateTime
-
-            binding.root.setOnClickListener {
-                listener.onPostClicked()
-            }
         }
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<DonationsResponse>() {
+    class DiffCallback : DiffUtil.ItemCallback<ApplicantsResponse>() {
         override fun areItemsTheSame(
-            oldItem: DonationsResponse, newItem: DonationsResponse
+            oldItem: ApplicantsResponse, newItem: ApplicantsResponse
         ): Boolean {
             return oldItem == newItem
         }
 
         @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(
-            oldItem: DonationsResponse, newItem: DonationsResponse
+            oldItem: ApplicantsResponse, newItem: ApplicantsResponse
         ): Boolean {
             return oldItem == newItem
         }
-    }
-
-    interface Listener {
-        fun onPostClicked()
     }
 }

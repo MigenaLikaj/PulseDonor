@@ -9,7 +9,7 @@ import com.pulsedonor.app.base.activity.BaseActivity
 import com.pulsedonor.app.base.viewmodel.PulseDonorViewModelFactory
 import com.pulsedonor.app.data.AppPreferences
 import com.pulsedonor.app.databinding.MyPostsActivityBinding
-import com.pulsedonor.app.models.introduction.DonationsResponse
+import com.pulsedonor.app.models.profile.DonationsResponse
 import com.pulsedonor.app.ui.MainViewModel
 import javax.inject.Inject
 
@@ -55,6 +55,10 @@ class MyPostsActivity : BaseActivity<MyPostsActivityBinding>(), MyPostsAdapter.L
     override fun onClicks() {
         binding.ivBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
+        }
+
+        binding.ivAddPost.setOnClickListener {
+            startActivity(Intent(this, AddPostActivity::class.java))
         }
     }
 

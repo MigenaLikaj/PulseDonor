@@ -1,4 +1,4 @@
-package com.pulsedonor.app.models.introduction
+package com.pulsedonor.app.models.profile
 
 
 data class DonationsResponse(
