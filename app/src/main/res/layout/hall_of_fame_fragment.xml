@@ -23,7 +23,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/bg_solid_white_top_right_left_radius_20dp"
+        android:paddingBottom="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -97,20 +99,20 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvDonorListTitle" />
 
-                <!-- Highlighted Position Section -->
-                <!--    <TextView-->
-                <!--        android:id="@+id/tvHighlightedPosition"-->
-                <!--        android:layout_width="match_parent"-->
-                <!--        android:layout_height="wrap_content"-->
-                <!--        android:background="@color/primary50"-->
-                <!--        android:gravity="center"-->
-                <!--        android:padding="8dp"-->
-                <!--        android:text="Your Position: #15"-->
-                <!--        android:textSize="16sp"-->
-                <!--        android:textStyle="bold"-->
-                <!--        app:layout_constraintBottom_toTopOf="@id/tvGroupTitle"-->
-                <!--        app:layout_constraintEnd_toEndOf="parent"-->
-                <!--        app:layout_constraintStart_toStartOf="parent" />-->
+                <TextView
+                    android:id="@+id/tvHighlightedPosition"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#15F64E60"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="Your Position: #15"
+                    android:textColor="@color/primary50"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toTopOf="@id/tvGroupTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <!-- Group Donor List Section -->
                 <TextView
@@ -120,6 +122,7 @@
                     android:layout_marginStart="18dp"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/poppins_semibold"
+                    android:includeFontPadding="false"
                     android:text="Group Donors"
                     android:textColor="@color/primary"
                     android:textSize="16sp"
@@ -141,7 +144,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="18dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="2dp"
                     android:orientation="vertical"
                     android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -176,7 +179,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/bg_stroke_radius_10dp_cl_primary"
-                        android:text="Join Group" />
+                        android:text="Join Group"
+                        android:textAllCaps="false"
+                        android:textColor="@color/primary" />
 
                     <Button
                         android:id="@+id/btnCreateGroup"
@@ -184,7 +189,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:background="@drawable/bg_stroke_radius_10dp_cl_primary"
-                        android:text="Create Group" />
+                        android:text="Create Group"
+                        android:textAllCaps="false"
+                        android:textColor="@color/primary" />
                 </LinearLayout>
 
                 <TextView
@@ -204,10 +211,10 @@
                     android:id="@+id/pieChartBloodGroups"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginHorizontal="18dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/layoutJoinGroup" />
+                    app:layout_constraintTop_toBottomOf="@id/tvBloodGroups" />
 
                 <TextView
                     android:id="@+id/tvChartDonations"
@@ -226,7 +233,9 @@
                     android:id="@+id/lineChartDonations"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:layout_marginHorizontal="18dp"
                     android:layout_marginTop="16dp"
+                    android:paddingBottom="50dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvChartDonations" />

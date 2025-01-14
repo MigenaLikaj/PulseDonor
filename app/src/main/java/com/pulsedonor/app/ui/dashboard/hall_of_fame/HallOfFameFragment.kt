@@ -1,7 +1,16 @@
 package com.pulsedonor.app.ui.dashboard.hall_of_fame
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.utils.ColorTemplate
 import com.pulsedonor.app.adapters.hall_of_fame.DonorsAdapter
 import com.pulsedonor.app.base.fragment.BaseFragment
 import com.pulsedonor.app.databinding.HallOfFameFragmentBinding
@@ -17,12 +26,19 @@ class HallOfFameFragment : BaseFragment<HallOfFameFragmentBinding>() {
     override fun inflateBinding(layoutInflater: LayoutInflater): HallOfFameFragmentBinding =
         HallOfFameFragmentBinding.inflate(layoutInflater)
 
-
     override fun observeViewModel() {
     }
 
     override fun initViews() {
-        // Initialize and set adapter for donors
+        // Initialize RecyclerView for donors and top donors
+        setupDonorsRecyclerView()
+
+        // Populate charts with dummy data
+        setupLineChart()
+        setupPieChart()
+    }
+
+    private fun setupDonorsRecyclerView() {
         donorsAdapter = DonorsAdapter()
         binding.rvDonors.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -36,7 +52,6 @@ class HallOfFameFragment : BaseFragment<HallOfFameFragmentBinding>() {
         )
         donorsAdapter.submitList(donorsList)
 
-        // Initialize and set adapter for top donors
         topDonorsAdapter = DonorsAdapter()
         binding.rvTopDonors.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -51,8 +66,58 @@ class HallOfFameFragment : BaseFragment<HallOfFameFragmentBinding>() {
         topDonorsAdapter.submitList(topDonorsList)
     }
 
+    private fun setupLineChart() {
+        val entries = mutableListOf<Entry>()
+        val labels = listOf("Jan", "Feb", "Mar", "Apr", "May")
+
+        for (i in labels.indices) {
+            entries.add(Entry(i.toFloat(), (10..50).random().toFloat()))
+        }
+
+        val lineDataSet = LineDataSet(entries, "Donations Over Time")
+        lineDataSet.color = Color.GREEN
+        lineDataSet.circleRadius = 5f
+        lineDataSet.setCircleColor(Color.RED)
+        lineDataSet.lineWidth = 2f
+
+        val lineData = LineData(lineDataSet)
+
+        binding.lineChartDonations.apply {
+            data = lineData
+            description.text = "Monthly Donations"
+            setTouchEnabled(true)
+            setPinchZoom(true)
+            invalidate()
+        }
+    }
+
+    private fun setupPieChart() {
+        val entries = listOf(
+            PieEntry(40f, "A"),
+            PieEntry(30f, "B"),
+            PieEntry(20f, "O"),
+            PieEntry(10f, "AB")
+        )
+
+        val pieDataSet = PieDataSet(entries, "Blood Group Distribution")
+        pieDataSet.colors = ColorTemplate.MATERIAL_COLORS.toList()
+        pieDataSet.valueTextColor = Color.BLACK
+        pieDataSet.valueTextSize = 12f
+
+        val pieData = PieData(pieDataSet)
+
+        binding.pieChartBloodGroups.apply {
+            data = pieData
+            description.text = "Blood Group %"
+            isDrawHoleEnabled = true
+            setEntryLabelColor(Color.BLACK)
+            setUsePercentValues(true)
+            legend.orientation = Legend.LegendOrientation.HORIZONTAL
+            legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
+            invalidate()
+        }
+    }
 
     override fun onClicks() {
     }
-
 }
