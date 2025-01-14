@@ -159,4 +159,7 @@ dependencies {
 
     //Pin view
     implementation 'io.github.chaosleung:pinview:1.4.4'
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
 }

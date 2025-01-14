@@ -5,15 +5,24 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
 import com.pulsedonor.app.R
+import com.pulsedonor.app.utilities.glide.GlideApp
 import io.github.muddz.styleabletoast.StyleableToast
-import java.io.IOException
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 import java.util.regex.Pattern
 
 var token: String = ""
@@ -116,7 +125,43 @@ fun Context.showToast(message: String) {
         .show()
 }
 
- fun openActivity(context: Context, activity: Activity) {
+fun openActivity(context: Context, activity: Activity) {
     val intent = Intent(context, activity::class.java)
     context.startActivity(intent)
+}
+
+fun ImageView.loadUrl(url: String, placeholder: Int, loader: ProgressBar?) {
+    if (loader == null) {
+        GlideApp.with(context).load(url).placeholder(placeholder)
+            .apply(RequestOptions.fitCenterTransform())
+            .into(this)
+    } else {
+        val glideListener = object : RequestListener<Drawable> {
+            override fun onLoadFailed(
+                e: GlideException?,
+                model: Any?,
+                target: Target<Drawable>?,
+                isFirstResource: Boolean
+            ): Boolean {
+                loader.visibility = View.GONE
+                return false
+            }
+
+            override fun onResourceReady(
+                resource: Drawable?,
+                model: Any?,
+                target: Target<Drawable>?,
+                dataSource: com.bumptech.glide.load.DataSource?,
+                isFirstResource: Boolean
+            ): Boolean {
+                loader.visibility = View.GONE
+                return false
+            }
+
+        }
+
+        GlideApp.with(context).load(url).placeholder(placeholder).listener(glideListener)
+            .apply(RequestOptions.fitCenterTransform())
+            .into(this)
+    }
 }
