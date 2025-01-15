@@ -1,5 +1,6 @@
 package com.pulsedonor.app.ui.dashboard.home
 
+import android.content.Intent
 import android.view.LayoutInflater
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
@@ -21,6 +22,9 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>() {
     }
 
     override fun onClicks() {
+        binding.clChat.setOnClickListener {
+            startActivity(Intent(requireContext(), ChatActivity::class.java))
+        }
     }
 
     private fun initTabLayoutAndViewPager() {

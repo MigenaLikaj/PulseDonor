@@ -6,6 +6,29 @@
     android:layout_height="match_parent"
     android:background="@color/primary">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clChat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="90dp"
+        android:background="@drawable/bg_solid_cl_primary_radius_12dp"
+        android:backgroundTint="@color/white"
+        android:translationZ="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/tvChat"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:padding="15dp"
+            android:src="@drawable/chat"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     <ImageView
         android:id="@+id/ivNotifications"
         android:layout_width="wrap_content"
@@ -82,4 +105,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
