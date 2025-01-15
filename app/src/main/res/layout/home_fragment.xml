@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="90dp"
+        android:layout_marginBottom="85dp"
         android:background="@drawable/bg_solid_cl_primary_radius_12dp"
         android:backgroundTint="@color/white"
         android:translationZ="10dp"

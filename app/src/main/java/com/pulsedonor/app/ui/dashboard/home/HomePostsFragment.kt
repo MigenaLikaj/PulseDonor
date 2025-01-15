@@ -21,7 +21,6 @@ class HomePostsFragment : BaseFragment<HomePostsFragmentBinding>(), PostsInHomeA
     }
 
     override fun initViews() {
-
         postsInHomeAdapter = PostsInHomeAdapter(this)
         binding.rvPosts.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

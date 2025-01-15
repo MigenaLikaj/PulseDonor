@@ -7,25 +7,24 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.pulsedonor.app.R
-import com.pulsedonor.app.databinding.PostInHomeItemBinding
-import com.pulsedonor.app.models.home.HomePostsResponse
-import com.pulsedonor.app.utilities.loadUrl
+import com.pulsedonor.app.databinding.ApplicationsListItemBinding
+import com.pulsedonor.app.models.home.HomeApplicationsResponse
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.TimeZone
 
-class PostsInHomeAdapter(val listener: Listener) :
-    ListAdapter<HomePostsResponse, RecyclerView.ViewHolder>(DiffCallback()) {
+class MyApplicationsInHomeAdapter :
+    ListAdapter<HomeApplicationsResponse, RecyclerView.ViewHolder>(DiffCallback()) {
 
     init {
         hasStableIds()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val binding = PostInHomeItemBinding.inflate(
+        val binding = ApplicationsListItemBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
-        return PostsInHomeItemViewHolder(binding)
+        return ApplicationsInHomeItemViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
@@ -37,24 +36,17 @@ class PostsInHomeAdapter(val listener: Listener) :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as PostsInHomeItemViewHolder).bind(getItem(position) as HomePostsResponse)
+        (holder as ApplicationsInHomeItemViewHolder).bind(getItem(position) as HomeApplicationsResponse)
     }
 
-    inner class PostsInHomeItemViewHolder(val binding: PostInHomeItemBinding) :
+    inner class ApplicationsInHomeItemViewHolder(val binding: ApplicationsListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("NotifyDataSetChanged", "SimpleDateFormat")
-        fun bind(item: HomePostsResponse) = with(itemView) {
+        fun bind(item: HomeApplicationsResponse) = with(itemView) {
 
-            binding.tvPosterName.text = item.posterName
             binding.tvUrgency.text = item.urgency
-            binding.tvHospital.text = item.hospital
             binding.tvQuantity.text = item.quantity
             binding.tvBloodGroup.text = item.bloodGroup
-            binding.tvBloodRecipientAge.text = item.bloodRecipientAge.toString()
-            binding.tvBloodRecipientName.text = item.bloodRecipientName
-            binding.civPosterImage.loadUrl(
-                item.posterImage, R.drawable.empty_profile, null
-            )
 
             val utcDateFormat =
                 SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault()).apply {
@@ -65,28 +57,30 @@ class PostsInHomeAdapter(val listener: Listener) :
             val formattedDayStr = localDateFormat.format(date)
             binding.tvDateTime.text = formattedDayStr
 
-            binding.btnApply.setOnClickListener {
-                listener.onApplyClicked()
+            if (item.statustype == 1) {
+                binding.ivStatus.setImageResource(R.drawable.accept)
+            } else if (item.statustype == 2) {
+                binding.ivStatus.setImageResource(R.drawable.reject)
+            } else {
+                binding.ivStatus.setImageResource(R.drawable.clockwise)
             }
+
         }
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<HomePostsResponse>() {
+    class DiffCallback : DiffUtil.ItemCallback<HomeApplicationsResponse>() {
         override fun areItemsTheSame(
-            oldItem: HomePostsResponse, newItem: HomePostsResponse
+            oldItem: HomeApplicationsResponse, newItem: HomeApplicationsResponse
         ): Boolean {
             return oldItem == newItem
         }
 
         @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(
-            oldItem: HomePostsResponse, newItem: HomePostsResponse
+            oldItem: HomeApplicationsResponse, newItem: HomeApplicationsResponse
         ): Boolean {
             return oldItem == newItem
         }
     }
 
-    interface Listener {
-        fun onApplyClicked()
-    }
 }
