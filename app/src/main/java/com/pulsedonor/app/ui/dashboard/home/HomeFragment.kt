@@ -6,6 +6,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.pulsedonor.app.base.fragment.BaseFragment
 import com.pulsedonor.app.databinding.HomeFragmentBinding
+import com.pulsedonor.app.ui.dashboard.chat.ChatActivity
 import com.pulsedonor.app.ui.dashboard.notifications.NotificationsActivity
 
 class HomeFragment : BaseFragment<HomeFragmentBinding>() {
@@ -52,8 +53,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>() {
             }
 
         }.attach()
-        // disable viewpager to swiping
-        binding.vpRanking.isUserInputEnabled = false
+
         binding.vpRanking.registerOnPageChangeCallback(onPageChanged)
     }
 

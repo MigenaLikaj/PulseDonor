@@ -4,7 +4,7 @@ import com.pulsedonor.app.di.modules.DashboardActivityModule
 import com.pulsedonor.app.di.modules.NotificationsActivityModule
 import com.pulsedonor.app.di.modules.ProfileActivityModule
 import com.pulsedonor.app.ui.dashboard.DashboardActivity
-import com.pulsedonor.app.ui.dashboard.home.ChatActivity
+import com.pulsedonor.app.ui.dashboard.chat.ChatActivity
 import com.pulsedonor.app.ui.dashboard.notifications.NotificationsActivity
 import com.pulsedonor.app.ui.dashboard.profile.AddPostActivity
 import com.pulsedonor.app.ui.dashboard.profile.ChangePasswordActivity

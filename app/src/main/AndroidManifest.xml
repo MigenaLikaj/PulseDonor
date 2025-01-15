@@ -18,7 +18,7 @@
         android:theme="@style/Theme.PulseDonor"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.dashboard.home.ChatActivity"
+            android:name=".ui.dashboard.chat.ChatActivity"
             android:exported="false"
             android:theme="@style/FullScreenActivityTheme" />
         <activity
