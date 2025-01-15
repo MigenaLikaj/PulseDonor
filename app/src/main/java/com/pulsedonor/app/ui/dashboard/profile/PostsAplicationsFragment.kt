@@ -1,13 +1,18 @@
 package com.pulsedonor.app.ui.dashboard.profile
 
+import android.app.AlertDialog
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pulsedonor.app.adapters.profile.ApplicantsAdapter
 import com.pulsedonor.app.base.fragment.BaseFragment
 import com.pulsedonor.app.databinding.PostsAplicationsFragmentBinding
 import com.pulsedonor.app.models.profile.ApplicantsResponse
 
-class PostsApplicationsFragment : BaseFragment<PostsAplicationsFragmentBinding>() {
+class PostsApplicationsFragment : BaseFragment<PostsAplicationsFragmentBinding>(),
+    ApplicantsAdapter.Listener {
 
     lateinit var applicantsAdapter: ApplicantsAdapter
     private var applicantsList = ArrayList<ApplicantsResponse?>()
@@ -20,7 +25,7 @@ class PostsApplicationsFragment : BaseFragment<PostsAplicationsFragmentBinding>(
 
     override fun initViews() {
 
-        applicantsAdapter = ApplicantsAdapter()
+        applicantsAdapter = ApplicantsAdapter(this)
         binding.rvAplicants.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = applicantsAdapter
@@ -81,6 +86,28 @@ class PostsApplicationsFragment : BaseFragment<PostsAplicationsFragmentBinding>(
     }
 
     override fun onClicks() {
+    }
+
+    override fun onApplicantClicked(phoneNumber: String) {
+        val alert = AlertDialog.Builder(requireContext()).setItems(
+            arrayOf("A deshironi te kontaktoni kete person?")
+        ) { _, which -> }
+        alert.setCancelable(true).setPositiveButton("Po") { dialog, _ ->
+            try {
+                val intent = Intent(Intent.ACTION_DIAL).apply {
+                    data = Uri.parse("tel:$phoneNumber")
+                }
+                startActivity(intent)
+            } catch (e: Exception) {
+                Toast.makeText(requireContext(), "Unable to open dialer", Toast.LENGTH_SHORT).show()
+            }
+            dialog.dismiss()
+        }.setNegativeButton("Jo") { dialog, _ ->
+            dialog.dismiss()
+        }
+        alert.setOnCancelListener { it.dismiss() }
+        alert.create()
+        alert.show()
     }
 
 }

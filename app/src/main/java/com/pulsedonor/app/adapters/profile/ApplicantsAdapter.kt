@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pulsedonor.app.databinding.ApplicantsItemBinding
 import com.pulsedonor.app.models.profile.ApplicantsResponse
 
-class ApplicantsAdapter :
+class ApplicantsAdapter(val listener: Listener) :
     ListAdapter<ApplicantsResponse, RecyclerView.ViewHolder>(DiffCallback()) {
 
     init {
@@ -44,6 +44,10 @@ class ApplicantsAdapter :
             binding.tvEmail.text = item.email
             binding.tvPhoneNumber.text = item.phoneNumber
             binding.tvBloodGroup.text = item.bloodGroup
+
+            binding.root.setOnClickListener {
+                listener.onApplicantClicked(item.phoneNumber)
+            }
         }
     }
 
@@ -60,5 +64,9 @@ class ApplicantsAdapter :
         ): Boolean {
             return oldItem == newItem
         }
+    }
+
+    interface Listener {
+        fun onApplicantClicked(phoneNumber: String)
     }
 }
