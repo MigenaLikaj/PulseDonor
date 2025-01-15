@@ -1,9 +1,11 @@
 package com.pulsedonor.app.di
 
 import com.pulsedonor.app.di.modules.DashboardActivityModule
+import com.pulsedonor.app.di.modules.NotificationsActivityModule
 import com.pulsedonor.app.di.modules.ProfileActivityModule
 import com.pulsedonor.app.ui.dashboard.DashboardActivity
 import com.pulsedonor.app.ui.dashboard.home.ChatActivity
+import com.pulsedonor.app.ui.dashboard.notifications.NotificationsActivity
 import com.pulsedonor.app.ui.dashboard.profile.AddPostActivity
 import com.pulsedonor.app.ui.dashboard.profile.ChangePasswordActivity
 import com.pulsedonor.app.ui.dashboard.profile.DonationsActivity
@@ -25,6 +27,9 @@ abstract class BuildersModule {
 
     @ContributesAndroidInjector(modules = [ProfileActivityModule::class])
     internal abstract fun bindPostDetailsActivity(): PostDetailsActivity
+
+    @ContributesAndroidInjector(modules = [NotificationsActivityModule::class])
+    internal abstract fun bindNotificationsActivity(): NotificationsActivity
 
     @ContributesAndroidInjector()
     internal abstract fun bindSignInActivity(): SignInActivity

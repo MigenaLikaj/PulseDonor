@@ -32,9 +32,6 @@ class PostDetailsActivity : BaseActivity<PostDetailsActivityBinding>() {
             }
         }.attach()
 
-//        // Disable swiping for ViewPager2
-//        binding.vpRanking.isUserInputEnabled = false
-
         binding.vpRanking.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)

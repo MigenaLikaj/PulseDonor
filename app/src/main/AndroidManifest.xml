@@ -47,7 +47,8 @@
             android:theme="@style/FullScreenActivityTheme" />
         <activity
             android:name=".ui.dashboard.notifications.NotificationsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/FullScreenActivityTheme" />
         <activity
             android:name=".ui.dashboard.DashboardActivity"
             android:exported="false"
