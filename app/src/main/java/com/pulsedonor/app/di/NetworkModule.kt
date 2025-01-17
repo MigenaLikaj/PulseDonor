@@ -42,7 +42,7 @@ object NetworkModule {
             .connectTimeout(50, TimeUnit.SECONDS)
             .build()
         return Retrofit.Builder()
-            .baseUrl("https://teedup-api-v2.azurewebsites.net/api/")
+            .baseUrl("https://tallsageroof48.conveyor.cloud/api/")
             .client(client)
             .addConverterFactory(MoshiConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))

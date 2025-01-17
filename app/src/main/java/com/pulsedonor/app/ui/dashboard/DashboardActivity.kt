@@ -61,6 +61,19 @@ class DashboardActivity : BaseActivity<DashboardActivityBinding>() {
                 }
             }
         }
+
+//        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+//            if (!task.isSuccessful) {
+//                Log.w(
+//                    "DashboardActivity", "Fetching FCM registration token failed", task.exception
+//                )
+//                return@OnCompleteListener
+//            }
+//
+//            val token = task.result
+//            println("fcm tokeennn ${token}")
+//
+//        })
     }
 
 

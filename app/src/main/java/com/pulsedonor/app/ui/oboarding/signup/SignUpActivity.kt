@@ -1,14 +1,18 @@
 package com.pulsedonor.app.ui.oboarding.signup
 
-import android.text.Editable
-import android.text.TextWatcher
+import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
-import com.pulsedonor.app.R
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.pulsedonor.app.base.activity.BaseActivity
 import com.pulsedonor.app.base.viewmodel.PulseDonorViewModelFactory
 import com.pulsedonor.app.data.AppPreferences
 import com.pulsedonor.app.databinding.SignUpActivityBinding
+import com.pulsedonor.app.models.auth.GenderData
+import com.pulsedonor.app.models.datas.BloodTypesData
+import com.pulsedonor.app.ui.MainViewModel
 import com.pulsedonor.app.ui.oboarding.signin.SignInActivity
 import com.pulsedonor.app.utilities.openActivity
 import javax.inject.Inject
@@ -20,15 +24,61 @@ class SignUpActivity : BaseActivity<SignUpActivityBinding>() {
 
     @Inject
     lateinit var viewModelFactory: PulseDonorViewModelFactory
-    var phoneNumberValid = false
+    private lateinit var viewModel: MainViewModel
+    private var bloodTypesList = ArrayList<BloodTypesData>()
+    private var gendersList = arrayListOf(
+        GenderData(1, "Female"),
+        GenderData(2, "Male"),
+        GenderData(3, "Other")
+    )
+    var genderId = 0
+    var bloodTypeId = 0
+    var firstName = ""
+    var lastName = ""
+    var email = ""
+    var password = ""
+
 
     override fun inflateBinding(layoutInflater: LayoutInflater): SignUpActivityBinding =
         SignUpActivityBinding.inflate(layoutInflater)
 
     override fun initViews() {
+        viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
+        viewModel.getBloodTypes()
     }
 
     override fun observeViewModel() {
+
+        viewModel.successSignUp.observe(this) {
+            it.data?.let {
+                Toast.makeText(this, "Regjistrimi u krye me sukses!", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, SignInActivity::class.java))
+            }
+        }
+
+        viewModel.getBloodTypes.observe(this) { response ->
+            response.data?.let { data ->
+                bloodTypesList.clear()
+                bloodTypesList.addAll(data)
+
+                val bloodTypeName = bloodTypesList.map { it.text }
+                val genderAdapter = ArrayAdapter(
+                    this,
+                    android.R.layout.simple_dropdown_item_1line,
+                    bloodTypeName
+                )
+
+                binding.actvBloodGroup.setAdapter(genderAdapter)
+                binding.actvBloodGroup.threshold = 1
+                binding.actvBloodGroup.onItemClickListener =
+                    AdapterView.OnItemClickListener { parent, view, position, id ->
+                        val selectedbloodTypeName = parent.getItemAtPosition(position) as String
+                        val selectedbloodType =
+                            bloodTypesList.find { it.value == selectedbloodTypeName }
+                        bloodTypeId = selectedbloodType?.value?.toInt() ?: -1
+                    }
+            }
+        }
     }
 
     override fun onClicks() {
@@ -40,54 +90,30 @@ class SignUpActivity : BaseActivity<SignUpActivityBinding>() {
             openActivity(this, SignInActivity())
         }
 
-        binding.ccp.registerCarrierNumberEditText(binding.etPhoneNumber)
+        lastName = binding.etLastName.editableText.toString()
+        firstName = binding.etFirstName.editableText.toString()
+        email = binding.etEmail.editableText.toString().trim()
+        password = binding.etPassword.editableText.toString()
 
-        binding.ccp.setPhoneNumberValidityChangeListener {
-            phoneNumberValid = if (it) {
-                binding.ivValidateIcon.setImageResource(R.drawable.small_tick_icon)
-                true
-            } else {
-                binding.ivValidateIcon.setImageResource(R.drawable.small_x_icon)
-                false
-            }
-        }
+        val genderNames = gendersList.map { it.name }
+        val genderAdapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_dropdown_item_1line,
+            genderNames
+        )
 
-        binding.ccp.setOnCountryChangeListener {
-            binding.etPhoneNumber.setText("")
-            binding.etPhoneNumber.isEnabled = true
-        }
-
-
-        val textWatcher: TextWatcher = object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-
+        binding.actvGenderId.setAdapter(genderAdapter)
+        binding.actvGenderId.threshold = 1
+        binding.actvGenderId.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                val selectedGenderName = parent.getItemAtPosition(position) as String
+                val selectedGender = gendersList.find { it.name == selectedGenderName }
+                genderId = selectedGender?.id!!
             }
 
-            override fun afterTextChanged(s: Editable) {
-                if (s.isNotEmpty()) {
-                    binding.ivValidateIcon.visibility = View.VISIBLE
-                } else {
-                    binding.ivValidateIcon.visibility = View.GONE
-                }
-            }
-        }
-        binding.etPhoneNumber.addTextChangedListener(textWatcher)
-
-        binding.etPhoneNumber.setOnFocusChangeListener { v, hasFocus ->
-            if (hasFocus) {
-                binding.tvLabel.visibility = View.VISIBLE
-                binding.etPhoneNumber.hint = ""
-            } else {
-                if (binding.etPhoneNumber.editableText.isNullOrBlank()) {
-                    binding.tvLabel.visibility = View.INVISIBLE
-                    binding.etPhoneNumber.hint = this.getString(R.string.phone_number)
-                } else {
-                    binding.tvLabel.visibility = View.VISIBLE
-                }
-            }
+        binding.btnSignUp.setOnClickListener {
+            val userName = "$firstName $lastName"
+            viewModel.signUp(userName, firstName, lastName, password, email, genderId, bloodTypeId)
         }
     }
 

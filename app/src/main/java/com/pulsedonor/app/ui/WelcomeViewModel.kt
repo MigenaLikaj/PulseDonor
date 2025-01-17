@@ -9,23 +9,12 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class WelcomeViewModel @Inject constructor(val appPreferences: AppPreferences, val apiService: ApiService) : ViewModel() {
+class WelcomeViewModel @Inject constructor(
+    val appPreferences: AppPreferences,
+    val apiService: ApiService
+) : ViewModel() {
     lateinit var disposable: Disposable
     var loading = MutableLiveData<Boolean>()
-
-    fun getUserSubscription() {
-        disposable = apiService.getCountries()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnTerminate { loading.value = false }
-            .doOnSubscribe { loading.value = true }
-            .subscribe({ result ->
-                println("teeest $result")
-            }, { error ->
-                error.printStackTrace()
-//                errorHandle(error)
-            })
-    }
 
 
 }
