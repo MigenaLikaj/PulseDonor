@@ -58,6 +58,8 @@ class MainViewModel @Inject constructor(
                     lastName = lastname,
                     password = password,
                     email = email,
+                    genderId = genderId,
+                    bloodTypeId = bloodTypeId,
                 )
             )
         )

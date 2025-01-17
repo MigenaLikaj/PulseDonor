@@ -1,6 +1,5 @@
 package com.pulsedonor.app.ui.oboarding.signup
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -56,7 +55,6 @@ class SignUpActivity : BaseActivity<SignUpActivityBinding>() {
         viewModel.successSignUp.observe(this) {
             it.data?.let {
                 Toast.makeText(this, "Regjistrimi u krye me sukses!", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this, SignInActivity::class.java))
             }
         }
 
@@ -77,9 +75,17 @@ class SignUpActivity : BaseActivity<SignUpActivityBinding>() {
                 binding.actvBloodGroup.onItemClickListener =
                     AdapterView.OnItemClickListener { parent, view, position, id ->
                         val selectedbloodTypeName = parent.getItemAtPosition(position) as String
-                        val selectedbloodType =
-                            bloodTypesList.find { it.value == selectedbloodTypeName }
-                        bloodTypeId = selectedbloodType?.value?.toInt() ?: -1
+
+                        val selectedbloodType = bloodTypesList.find {
+                            it.text?.trim().equals(selectedbloodTypeName.trim(), ignoreCase = true)
+                        }
+
+                        val bloodTypeId =
+                            selectedbloodType?.value?.toIntOrNull() ?: -1 // Safe conversion to Int
+                        val bloodTypeText = selectedbloodType?.text.orEmpty()
+
+                        binding.actvBloodGroup.setText(bloodTypeText)
+                        this.bloodTypeId = bloodTypeId
                     }
             }
         }
@@ -113,9 +119,14 @@ class SignUpActivity : BaseActivity<SignUpActivityBinding>() {
                 val selectedGenderName = parent.getItemAtPosition(position) as String
                 val selectedGender = gendersList.find { it.name == selectedGenderName }
                 genderId = selectedGender?.id!!
+                println("genderId $genderId")
             }
 
         binding.btnSignUp.setOnClickListener {
+            firstName = binding.etFirstName.editableText.toString()
+            lastName = binding.etLastName.editableText.toString()
+            email = binding.etEmail.editableText.toString()
+            password = binding.etPassword.editableText.toString()
             val userName = "$firstName $lastName"
             viewModel.signUp(userName, firstName, lastName, password, email, genderId, bloodTypeId)
         }
