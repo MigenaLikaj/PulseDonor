@@ -7,7 +7,7 @@ data class AddEditBloodRequestBody(
     var bloodTypeId: Int? = null,
 
     @Json(name = "quantity")
-    var quantity: Int? = null,
+    var quantity: Double? = null,
 
     @Json(name = "urgenceTypeId")
     var urgenceTypeId: Int? = null,

@@ -7,7 +7,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class ViewPagerPosts(
     fragmentManager: FragmentManager,
-    lifecycle: Lifecycle
+    lifecycle: Lifecycle,
+    var postId: Int
 ) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
 
@@ -15,8 +16,8 @@ class ViewPagerPosts(
 
     override fun createFragment(position: Int): Fragment =
         when (position) {
-            0 -> PostsOverviewFragment()
-            1 -> PostsApplicationsFragment()
+            0 -> PostsOverviewFragment(postId)
+            1 -> PostsApplicationsFragment(postId)
             else -> throw IllegalStateException("Invalid adapter position")
         }
 }

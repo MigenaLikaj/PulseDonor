@@ -14,27 +14,29 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilBloodGroup"
-            style="@style/CustomTextInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:hint="@string/blood_group"
+            android:layout_marginTop="20dp"
             android:textColorHint="@color/cl_c8c5c3"
-            app:hintTextAppearance="@style/TextInputLayoutHintText"
+            app:hintEnabled="false"
             app:hintTextColor="@color/cl_c8c5c3">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etBloodGroup"
-                style="@style/CustomTextEditText"
+            <AutoCompleteTextView
+                android:id="@+id/actvBloodGroup"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="@drawable/bg_general_stroke_input_fields"
-                android:drawableStart="@drawable/blood_input_icon"
-                android:drawablePadding="7dp"
-                android:fontFamily="@font/sf_pro_display_medium"
-                android:inputType="text"
-                android:maxLines="1"
-                android:singleLine="true" />
+                android:enabled="false"
+                android:fontFamily="@font/poppins"
+                android:hint="Grupi i gjakut"
+                android:imeOptions="flagNoExtractUi"
+                android:includeFontPadding="false"
+                android:inputType="none"
+                android:padding="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/cl_c8c5c3"
+                android:textSize="14sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -54,7 +56,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_general_stroke_input_fields"
-                android:drawableStart="@drawable/blood_input_icon"
                 android:drawablePadding="7dp"
                 android:fontFamily="@font/sf_pro_display_medium"
                 android:inputType="text"
@@ -63,23 +64,22 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilEmergency"
+            android:id="@+id/tilAge"
             style="@style/CustomTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:hint="Urgjenca"
+            android:hint="Mosha"
             android:textColorHint="@color/cl_c8c5c3"
             app:hintTextAppearance="@style/TextInputLayoutHintText"
             app:hintTextColor="@color/cl_c8c5c3">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etEmergency"
+                android:id="@+id/etAge"
                 style="@style/CustomTextEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_general_stroke_input_fields"
-                android:drawableStart="@drawable/blood_input_icon"
                 android:drawablePadding="7dp"
                 android:fontFamily="@font/sf_pro_display_medium"
                 android:inputType="text"
@@ -88,28 +88,57 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilHospital"
-            style="@style/CustomTextInputLayout"
+            android:id="@+id/tilURGENCY"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:hint="Spitali"
+            android:layout_marginTop="20dp"
             android:textColorHint="@color/cl_c8c5c3"
-            app:hintTextAppearance="@style/TextInputLayoutHintText"
+            app:hintEnabled="false"
             app:hintTextColor="@color/cl_c8c5c3">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etHospital"
-                style="@style/CustomTextEditText"
+            <AutoCompleteTextView
+                android:id="@+id/actvUrgency"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="@drawable/bg_general_stroke_input_fields"
-                android:drawableStart="@drawable/location_input_icon"
-                android:drawablePadding="7dp"
-                android:fontFamily="@font/sf_pro_display_medium"
-                android:inputType="text"
-                android:maxLines="1"
-                android:singleLine="true" />
+                android:enabled="false"
+                android:fontFamily="@font/poppins"
+                android:hint="Urgjenca"
+                android:imeOptions="flagNoExtractUi"
+                android:includeFontPadding="false"
+                android:inputType="none"
+                android:padding="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/cl_c8c5c3"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilhospital"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textColorHint="@color/cl_c8c5c3"
+            app:hintEnabled="false"
+            app:hintTextColor="@color/cl_c8c5c3">
+
+            <AutoCompleteTextView
+                android:id="@+id/actvHospital"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_general_stroke_input_fields"
+                android:enabled="false"
+                android:fontFamily="@font/poppins"
+                android:hint="Spitali"
+                android:imeOptions="flagNoExtractUi"
+                android:includeFontPadding="false"
+                android:inputType="none"
+                android:padding="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/cl_c8c5c3"
+                android:textSize="14sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -131,11 +160,39 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_general_stroke_input_fields"
-                android:drawableStart="@drawable/calendar_icon"
                 android:drawablePadding="9dp"
                 android:focusable="false"
                 android:fontFamily="@font/poppins"
                 android:hint="Data"
+                android:imeOptions="flagNoExtractUi"
+                android:includeFontPadding="false"
+                android:inputType="date"
+                android:textCursorDrawable="@null" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilTime"
+            style="@style/CustomTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColorHint="@color/cl_c8c5c3"
+            app:hintTextAppearance="@style/TextInputLayoutHintText"
+            app:hintTextColor="@color/cl_c8c5c3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tilLastName">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etTime"
+                style="@style/CustomTextEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_general_stroke_input_fields"
+                android:drawablePadding="9dp"
+                android:focusable="false"
+                android:fontFamily="@font/poppins"
+                android:hint="Ora"
                 android:imeOptions="flagNoExtractUi"
                 android:includeFontPadding="false"
                 android:inputType="date"

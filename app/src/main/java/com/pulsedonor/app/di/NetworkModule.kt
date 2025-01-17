@@ -42,7 +42,7 @@ object NetworkModule {
             .connectTimeout(50, TimeUnit.SECONDS)
             .build()
         return Retrofit.Builder()
-            .baseUrl("https://tallsageroof48.conveyor.cloud/api/")
+            .baseUrl("http://ijustdontc-001-site1.jtempurl.com/api/")
             .client(client)
             .addConverterFactory(MoshiConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))

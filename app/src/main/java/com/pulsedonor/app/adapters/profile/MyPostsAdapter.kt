@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.pulsedonor.app.databinding.PostsListItemBinding
-import com.pulsedonor.app.models.profile.DonationsResponse
+import com.pulsedonor.app.models.profile.MyPostData
 
 class MyPostsAdapter(val listener: Listener) :
-    ListAdapter<DonationsResponse, RecyclerView.ViewHolder>(DiffCallback()) {
+    ListAdapter<MyPostData, RecyclerView.ViewHolder>(DiffCallback()) {
 
     init {
         hasStableIds()
@@ -32,42 +32,43 @@ class MyPostsAdapter(val listener: Listener) :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as PostsItemViewHolder).bind(getItem(position) as DonationsResponse)
+        (holder as PostsItemViewHolder).bind(getItem(position) as MyPostData)
     }
 
     inner class PostsItemViewHolder(val binding: PostsListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("NotifyDataSetChanged", "SimpleDateFormat")
-        fun bind(item: DonationsResponse) = with(itemView) {
+        fun bind(item: MyPostData) = with(itemView) {
 
-            binding.tvBloodGroup.text = item.bloodGroup
-            binding.tvQuantity.text = item.quantity
-            binding.tvUrgency.text = item.urgency
-            binding.tvHospital.text = item.hospital
-            binding.tvDateTime.text = item.dateTime
+            binding.tvBloodGroup.text = item.bloodType
+            binding.tvQuantity.text = "${item.quantity} ml"
+            binding.tvUrgency.text = item.urgenceType?.type
+            binding.tvHospital.text = item.hospital?.name
+            binding.tvDateTime.text = "${item.donationDate} ${item.donationTime}"
+            binding.tvNrOfAplications.text = item.numberOfApplications.toString()
 
             binding.root.setOnClickListener {
-                listener.onPostClicked()
+                listener.onPostClicked(item)
             }
         }
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<DonationsResponse>() {
+    class DiffCallback : DiffUtil.ItemCallback<MyPostData>() {
         override fun areItemsTheSame(
-            oldItem: DonationsResponse, newItem: DonationsResponse
+            oldItem: MyPostData, newItem: MyPostData
         ): Boolean {
             return oldItem == newItem
         }
 
         @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(
-            oldItem: DonationsResponse, newItem: DonationsResponse
+            oldItem: MyPostData, newItem: MyPostData
         ): Boolean {
             return oldItem == newItem
         }
     }
 
     interface Listener {
-        fun onPostClicked()
+        fun onPostClicked(item: MyPostData)
     }
 }

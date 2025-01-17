@@ -10,6 +10,7 @@ import com.pulsedonor.app.base.viewmodel.PulseDonorViewModelFactory
 import com.pulsedonor.app.data.AppPreferences
 import com.pulsedonor.app.databinding.MyPostsActivityBinding
 import com.pulsedonor.app.models.profile.DonationsResponse
+import com.pulsedonor.app.models.profile.MyPostData
 import com.pulsedonor.app.ui.MainViewModel
 import javax.inject.Inject
 
@@ -17,12 +18,12 @@ class MyPostsActivity : BaseActivity<MyPostsActivityBinding>(), MyPostsAdapter.L
     override fun inflateBinding(layoutInflater: LayoutInflater): MyPostsActivityBinding =
         MyPostsActivityBinding.inflate(layoutInflater)
 
-
     @Inject
     lateinit var appPreferences: AppPreferences
     private lateinit var viewModel: MainViewModel
     lateinit var myPostsAdapter: MyPostsAdapter
     private var donationsList = ArrayList<DonationsResponse?>()
+    private var myPostsList = ArrayList<MyPostData?>()
 
     @Inject
     lateinit var viewModelFactory: PulseDonorViewModelFactory
@@ -46,10 +47,19 @@ class MyPostsActivity : BaseActivity<MyPostsActivityBinding>(), MyPostsAdapter.L
             DonationsResponse("B-", "500 ml", "Low", "Health Center", "05/01/2025 - 15:00"),
             DonationsResponse("AB+", "350 ml", "High", "Downtown Clinic", "04/01/2025 - 09:00")
         )
-        myPostsAdapter.submitList(donationsList)
+//        myPostsAdapter.submitList(donationsList)
     }
 
     override fun observeViewModel() {
+
+        viewModel.getUserProfileBloodRequests.observe(this) { response ->
+            response.data?.let { data ->
+                myPostsList.clear()
+                myPostsList.addAll(data)
+                myPostsAdapter.submitList(myPostsList)
+                myPostsAdapter.notifyDataSetChanged()
+            }
+        }
     }
 
     override fun onClicks() {
@@ -62,7 +72,14 @@ class MyPostsActivity : BaseActivity<MyPostsActivityBinding>(), MyPostsAdapter.L
         }
     }
 
-    override fun onPostClicked() {
-        startActivity(Intent(this, PostDetailsActivity::class.java))
+    override fun onPostClicked(item: MyPostData) {
+        val intent = Intent(this, PostDetailsActivity::class.java)
+        intent.putExtra("id", item.id)
+        startActivity(intent)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getUserProfileBloodRequests()
     }
 }

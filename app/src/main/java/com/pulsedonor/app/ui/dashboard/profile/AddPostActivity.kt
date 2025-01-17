@@ -25,6 +25,8 @@ class AddPostActivity : BaseActivity<AddPostActivityBinding>() {
     }
 
     override fun observeViewModel() {
+
+
     }
 
     override fun onClicks() {

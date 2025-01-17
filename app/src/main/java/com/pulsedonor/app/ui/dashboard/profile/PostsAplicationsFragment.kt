@@ -16,7 +16,7 @@ import com.pulsedonor.app.models.profile.ApplicantsResponse
 import com.pulsedonor.app.ui.MainViewModel
 import javax.inject.Inject
 
-class PostsApplicationsFragment : BaseFragment<PostsAplicationsFragmentBinding>(),
+class PostsApplicationsFragment(postId: Int) : BaseFragment<PostsAplicationsFragmentBinding>(),
     ApplicantsAdapter.Listener {
 
     @Inject

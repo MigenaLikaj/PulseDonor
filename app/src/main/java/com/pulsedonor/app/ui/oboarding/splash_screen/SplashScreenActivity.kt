@@ -8,6 +8,7 @@ import com.pulsedonor.app.base.activity.BaseActivity
 import com.pulsedonor.app.base.viewmodel.PulseDonorViewModelFactory
 import com.pulsedonor.app.data.AppPreferences
 import com.pulsedonor.app.databinding.SplashScreenActivityBinding
+import com.pulsedonor.app.ui.dashboard.DashboardActivity
 import com.pulsedonor.app.ui.oboarding.intro.IntroductionActivity
 import javax.inject.Inject
 
@@ -27,11 +28,11 @@ class SplashScreenActivity : BaseActivity<SplashScreenActivityBinding>() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             var intent: Intent? = null
-//            if (appPreferences.token != null) {
-//                intent = Intent(this@SplashScreenActivity, DashboardActivity::class.java)
-//            } else {
-                intent = Intent(this@SplashScreenActivity, IntroductionActivity::class.java)
-//            }
+            intent = if (appPreferences.token != null) {
+                Intent(this@SplashScreenActivity, DashboardActivity::class.java)
+            } else {
+                Intent(this@SplashScreenActivity, IntroductionActivity::class.java)
+            }
             startActivity(intent)
             finish()
         }, SPLASH_TIME_OUT)

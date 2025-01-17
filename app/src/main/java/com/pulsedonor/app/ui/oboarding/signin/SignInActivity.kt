@@ -40,7 +40,7 @@ class SignInActivity : BaseActivity<SignInActivityBinding>() {
 
     override fun observeViewModel() {
         viewModel.successSignIn.observe(this) {
-            it.data?.let {
+            if (it == true) {
                 Toast.makeText(this, "Ju jeni kyçur me sukses!", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, DashboardActivity::class.java))
             }
@@ -61,12 +61,12 @@ class SignInActivity : BaseActivity<SignInActivityBinding>() {
         }
 
         binding.btnSignIn.setOnClickListener {
-            openActivity(this, DashboardActivity())
+//            openActivity(this, DashboardActivity())
             email = binding.etEmail.editableText.toString()
             password = binding.etPassword.editableText.toString()
             if (isEmailValid(email)) {
                 appPreferences.email = email
-                //                viewModel.signIn(email, password)
+                viewModel.signIn(email, password)
             } else {
                 binding.etEmail.error = "Email is not valid!"
 
