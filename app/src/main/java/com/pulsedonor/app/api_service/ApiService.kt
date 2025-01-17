@@ -7,6 +7,7 @@ import com.pulsedonor.app.models.auth.SignInBody
 import com.pulsedonor.app.models.auth.SignUpBody
 import com.pulsedonor.app.models.datas.BloodTypesResponse
 import com.pulsedonor.app.models.datas.CitiesResponse
+import com.pulsedonor.app.models.datas.DatasResponse
 import com.pulsedonor.app.models.hall_of_fame.GroupRequest
 import com.pulsedonor.app.models.home.BloodRequestsResponse
 import com.pulsedonor.app.models.profile.AddEditBloodRequestBody
@@ -24,7 +25,6 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
-
     //Account
     @GET("Account")
     fun getAccount(): Observable<GetAccountResponse>
@@ -32,7 +32,7 @@ interface ApiService {
     @POST("Account")
     fun editAccount(
         @Body editAccountBody: EditAccountBody
-    ): Observable<GetAccountResponse>
+    ): Observable<GeneralResponse>
 
     @GET("Account/user-profile-blood-requests")   //mvyn responsi
     fun getUserProfileBloodRequests(
@@ -128,15 +128,23 @@ interface ApiService {
     fun getCities(
     ): Observable<CitiesResponse>
 
+    @GET("Data/urgence-types")
+    fun getUrgencetypes(
+    ): Observable<DatasResponse>
+
+    @GET("Data/hospitals")
+    fun getHospitals(
+    ): Observable<DatasResponse>
+
 
     //hall of fame
     @GET("HallOfFame/top-three-donors")
     fun getTopThreeDonors(
-    ): Observable<BloodTypesResponse>
+    ): Observable<DatasResponse>
 
     @GET("HallOfFame/blood-types-chart")
     fun getBloodTypeCharts(
-    ): Observable<BloodTypesResponse>
+    ): Observable<DatasResponse>
 
     @POST("HallOfFame/group")
     fun group(

@@ -9,6 +9,9 @@ import com.pulsedonor.app.models.auth.SignInBody
 import com.pulsedonor.app.models.auth.SignUpBody
 import com.pulsedonor.app.models.auth.SignupDtoResponse
 import com.pulsedonor.app.models.datas.BloodTypesResponse
+import com.pulsedonor.app.models.datas.CitiesResponse
+import com.pulsedonor.app.models.profile.EditAccountBody
+import com.pulsedonor.app.models.profile.GetAccountResponse
 import com.pulsedonor.app.utilities.errorHandle
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -25,6 +28,9 @@ class MainViewModel @Inject constructor(
     var successSignUp = MutableLiveData<GeneralResponse>()
     var successSignIn = MutableLiveData<GeneralResponse>()
     var getBloodTypes = MutableLiveData<BloodTypesResponse>()
+    var getCities = MutableLiveData<CitiesResponse>()
+    var getUserProfile = MutableLiveData<GetAccountResponse>()
+    val dataSavedSuccessfully = MutableLiveData<Boolean>()
 
     fun signUp(
         userName: String,
@@ -94,5 +100,60 @@ class MainViewModel @Inject constructor(
             })
     }
 
+    fun getCities() {
+        disposable = apiService.getCities()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnTerminate { loading.value = false }
+            .doOnSubscribe { loading.value = true }
+            .subscribe({ result ->
+                getCities.value = result
+            }, { error ->
+                error.printStackTrace()
+                errorHandle(error)
+            })
+    }
+
+    fun getUserProfile() {
+        disposable = apiService.getAccount()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnTerminate { loading.value = false }
+            .doOnSubscribe { loading.value = true }
+            .subscribe({ result ->
+                getUserProfile.value = result
+            }, { error ->
+                error.printStackTrace()
+                errorHandle(error)
+            })
+    }
+
+    fun editAccount(
+        firstName: String,
+        lastName: String,
+        email: String,
+        bloodTypeId: Int,
+        primaryCityId: Int,
+    ) {
+        disposable = apiService.editAccount(
+            EditAccountBody(
+                firstName = firstName,
+                lastName = lastName,
+                email = email,
+                bloodTypeId = bloodTypeId,
+                primaryCityId = primaryCityId
+            )
+        )
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnTerminate { loading.value = false }
+            .doOnSubscribe { loading.value = true }
+            .subscribe({ result ->
+                dataSavedSuccessfully.value = true
+            }, { error ->
+                error.printStackTrace()
+                errorHandle(error)
+            })
+    }
 
 }

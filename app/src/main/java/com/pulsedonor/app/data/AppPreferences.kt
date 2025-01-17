@@ -7,12 +7,18 @@ import javax.inject.Inject
 class AppPreferences @Inject constructor(private val context: Context) {
     val PREFS_FILENAME = "com.pulsedonor.app"
     val TOKEN = "token"
+    val EMAIL = "email"
     val sharedPreferences: SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, 0)
 
 
     var token: String?
         get() = sharedPreferences.getString(TOKEN, null)
         set(value) = sharedPreferences.edit().putString(TOKEN, value).apply()
+
+    var email: String?
+        get() = sharedPreferences.getString(EMAIL, null)
+        set(value) = sharedPreferences.edit().putString(EMAIL, value).apply()
+
 
 //    fun start() {
 //        val shared = AppPreferences.getShared(context)

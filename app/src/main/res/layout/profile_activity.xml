@@ -174,122 +174,126 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilCity"
-                    style="@style/CustomTextInputLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:hint="@string/city"
+                    android:layout_marginTop="20dp"
                     android:textColorHint="@color/cl_c8c5c3"
-                    app:hintTextAppearance="@style/TextInputLayoutHintText"
+                    app:hintEnabled="false"
                     app:hintTextColor="@color/cl_c8c5c3">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etCity"
-                        style="@style/CustomTextEditText"
+                    <AutoCompleteTextView
+                        android:id="@+id/actvCity"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/bg_general_stroke_input_fields"
-                        android:drawableStart="@drawable/location_input_icon"
-                        android:drawablePadding="7dp"
-                        android:fontFamily="@font/sf_pro_display_medium"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:singleLine="true" />
+                        android:enabled="false"
+                        android:fontFamily="@font/poppins"
+                        android:hint="Qyteti"
+                        android:imeOptions="flagNoExtractUi"
+                        android:includeFontPadding="false"
+                        android:inputType="none"
+                        android:padding="15dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/cl_c8c5c3"
+                        android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp">
+                <!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="2dp">-->
 
-                    <ImageView
-                        android:id="@+id/ivValidateIcon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:src="@drawable/small_x_icon"
-                        android:visibility="invisible"
-                        app:layout_constraintBottom_toBottomOf="@+id/llPhoneNumberHolder"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/llPhoneNumberHolder"
-                        tools:visibility="visible" />
+                <!--                    <ImageView-->
+                <!--                        android:id="@+id/ivValidateIcon"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginEnd="10dp"-->
+                <!--                        android:src="@drawable/small_x_icon"-->
+                <!--                        android:visibility="invisible"-->
+                <!--                        app:layout_constraintBottom_toBottomOf="@+id/llPhoneNumberHolder"-->
+                <!--                        app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                        app:layout_constraintTop_toTopOf="@+id/llPhoneNumberHolder"-->
+                <!--                        tools:visibility="visible" />-->
 
-                    <TextView
-                        android:id="@+id/tvLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:layout_marginStart="15dp"
-                        android:fontFamily="@font/sf_pro_display_medium"
-                        android:text="@string/phone_number"
-                        android:textColor="@color/cl_c8c5c3"
-                        android:textSize="14sp"
-                        android:visibility="invisible"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/tvLabel"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_gravity="start"-->
+                <!--                        android:layout_marginStart="15dp"-->
+                <!--                        android:fontFamily="@font/sf_pro_display_medium"-->
+                <!--                        android:text="@string/phone_number"-->
+                <!--                        android:textColor="@color/cl_c8c5c3"-->
+                <!--                        android:textSize="14sp"-->
+                <!--                        android:visibility="invisible"-->
+                <!--                        app:layout_constraintStart_toStartOf="parent"-->
+                <!--                        app:layout_constraintTop_toTopOf="parent" />-->
 
-                    <LinearLayout
-                        android:id="@+id/llPhoneNumberHolder"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:background="@drawable/bg_general_stroke_input_fields"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvLabel">
+                <!--                    <LinearLayout-->
+                <!--                        android:id="@+id/llPhoneNumberHolder"-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginTop="3dp"-->
+                <!--                        android:background="@drawable/bg_general_stroke_input_fields"-->
+                <!--                        android:gravity="center_vertical"-->
+                <!--                        android:orientation="horizontal"-->
+                <!--                        app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                        app:layout_constraintStart_toStartOf="parent"-->
+                <!--                        app:layout_constraintTop_toBottomOf="@+id/tvLabel">-->
 
-                        <com.hbb20.CountryCodePicker
-                            android:id="@+id/ccp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            app:ccp_autoFormatNumber="true"
-                            app:ccp_defaultNameCode="XK"
-                            app:ccp_textSize="12sp" />
+                <!--                        <com.hbb20.CountryCodePicker-->
+                <!--                            android:id="@+id/ccp"-->
+                <!--                            android:layout_width="wrap_content"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:layout_marginStart="5dp"-->
+                <!--                            app:ccp_autoFormatNumber="true"-->
+                <!--                            app:ccp_defaultNameCode="XK"-->
+                <!--                            app:ccp_textSize="12sp" />-->
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etPhoneNumber"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@color/transparent"
-                            android:fontFamily="@font/sf_pro_display_medium"
-                            android:hint="@string/phone_number"
-                            android:inputType="phone"
-                            android:maxLines="1"
-                            android:paddingVertical="19dp"
-                            android:paddingStart="0dp"
-                            android:paddingEnd="33dp"
-                            android:singleLine="true"
-                            android:textColorHint="@color/cl_c8c5c3"
-                            android:textSize="12sp" />
-                    </LinearLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!--                        <com.google.android.material.textfield.TextInputEditText-->
+                <!--                            android:id="@+id/etPhoneNumber"-->
+                <!--                            android:layout_width="match_parent"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:background="@color/transparent"-->
+                <!--                            android:fontFamily="@font/sf_pro_display_medium"-->
+                <!--                            android:hint="@string/phone_number"-->
+                <!--                            android:inputType="phone"-->
+                <!--                            android:maxLines="1"-->
+                <!--                            android:paddingVertical="19dp"-->
+                <!--                            android:paddingStart="0dp"-->
+                <!--                            android:paddingEnd="33dp"-->
+                <!--                            android:singleLine="true"-->
+                <!--                            android:textColorHint="@color/cl_c8c5c3"-->
+                <!--                            android:textSize="12sp" />-->
+                <!--                    </LinearLayout>-->
+                <!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilBloodGroup"
-                    style="@style/CustomTextInputLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:hint="@string/blood_group"
+                    android:layout_marginTop="20dp"
                     android:textColorHint="@color/cl_c8c5c3"
-                    app:hintTextAppearance="@style/TextInputLayoutHintText"
+                    app:hintEnabled="false"
                     app:hintTextColor="@color/cl_c8c5c3">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etBloodGroup"
-                        style="@style/CustomTextEditText"
+                    <AutoCompleteTextView
+                        android:id="@+id/actvBloodGroup"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/bg_general_stroke_input_fields"
-                        android:drawableStart="@drawable/blood_input_icon"
-                        android:drawablePadding="7dp"
-                        android:fontFamily="@font/sf_pro_display_medium"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:singleLine="true" />
+                        android:enabled="false"
+                        android:fontFamily="@font/poppins"
+                        android:hint="Grupi i gjakut"
+                        android:imeOptions="flagNoExtractUi"
+                        android:includeFontPadding="false"
+                        android:inputType="none"
+                        android:padding="15dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/cl_c8c5c3"
+                        android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.switchmaterial.SwitchMaterial

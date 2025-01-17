@@ -65,6 +65,7 @@ class SignInActivity : BaseActivity<SignInActivityBinding>() {
             email = binding.etEmail.editableText.toString()
             password = binding.etPassword.editableText.toString()
             if (isEmailValid(email)) {
+                appPreferences.email = email
                 //                viewModel.signIn(email, password)
             } else {
                 binding.etEmail.error = "Email is not valid!"
