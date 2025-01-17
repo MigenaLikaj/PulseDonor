@@ -39,6 +39,7 @@ class MainViewModel @Inject constructor(
     var getUserProfile = MutableLiveData<GetAccountResponse>()
     var getUserProfileBloodRequests = MutableLiveData<MyPostsResponse>()
     var getBloodRequestByIdAC = MutableLiveData<GetMyPostdetailsData>()
+    var getChatResponse = MutableLiveData<GeneralResponse>()
 
     fun signUp(
         userName: String,
@@ -252,6 +253,20 @@ class MainViewModel @Inject constructor(
             .doOnSubscribe { loading.value = true }
             .subscribe({ result ->
                 dataSavedSuccessfully.value = true
+            }, { error ->
+                error.printStackTrace()
+                errorHandle(error)
+            })
+    }
+
+    fun useChat(text: String) {
+        disposable = apiService.useChat(text, bearerToken)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnTerminate { loading.value = false }
+            .doOnSubscribe { loading.value = true }
+            .subscribe({ result ->
+                getChatResponse.value = result
             }, { error ->
                 error.printStackTrace()
                 errorHandle(error)

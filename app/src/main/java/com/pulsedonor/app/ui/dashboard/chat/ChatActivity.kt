@@ -37,6 +37,18 @@ class ChatActivity : BaseActivity<ChatActivityBinding>() {
     override fun observeViewModel() {
         viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
 
+        viewModel.getChatResponse.observe(this) {
+            it.data?.let {
+                val receiverMessage = ChatsMessagesData(it, isSender = false)
+                messagesList.add(receiverMessage)
+                chatAdapter.submitList(messagesList.toList())
+                chatAdapter.notifyDataSetChanged()
+                binding.rvMessages.post {
+                    binding.rvMessages.scrollToPosition(messagesList.size - 1)
+                }
+            }
+        }
+
     }
 
     override fun onClicks() {
@@ -55,17 +67,13 @@ class ChatActivity : BaseActivity<ChatActivityBinding>() {
 
     private fun addMessageToList(message: String) {
         val senderMessage = ChatsMessagesData(message, isSender = true)
-        val receiverMessage = ChatsMessagesData(message, isSender = false)
-
         messagesList.add(senderMessage)
-        messagesList.add(receiverMessage)
 
         chatAdapter.submitList(messagesList.toList())
         chatAdapter.notifyDataSetChanged()
         binding.rvMessages.post {
             binding.rvMessages.scrollToPosition(messagesList.size - 1)
         }
-        println("Messages count: ${messagesList.size}")
-        println("Last message: ${messagesList.lastOrNull()?.message}")
+        viewModel.useChat(message)
     }
 }
