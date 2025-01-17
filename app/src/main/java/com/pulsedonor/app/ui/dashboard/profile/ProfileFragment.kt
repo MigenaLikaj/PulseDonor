@@ -37,6 +37,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding>() {
                 arrayOf("A jeni i/e sigurt qe deshironi te dilni?")
             ) { _, which -> }
             alert.setCancelable(true).setPositiveButton("Po") { dialog, _ ->
+                appPreferences.token = null
                 startActivity(Intent(requireContext(), IntroductionActivity::class.java))
                 requireActivity().finish()
             }.setNegativeButton("Jo") { dialog, _ ->

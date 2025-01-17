@@ -207,4 +207,11 @@ interface ApiService {
         @Header("Authorization") bearerToken: String
     ): Observable<GeneralResponse>
 
+    //appy vlood req
+    @POST("blood-request/send-request")
+    fun applyBloodRequest(
+        @Query("id") id: Int,
+        @Header("Authorization") bearerToken: String
+    ): Observable<GeneralResponseInt>
+
 }

@@ -13,20 +13,17 @@ class BloodRequestsData(
     @Json(name = "id")
     var id: Int? = null,
 
-    @Json(name = "authorId")
-    var authorId: String? = null,
+    @Json(name = "author")
+    var author: AuthorData? = null,
 
-    @Json(name = "bloodTypeId")
-    var bloodTypeId: Int? = null,
+    @Json(name = "bloodType")
+    var bloodType: BloodTypes? = null,
 
-    @Json(name = "urgencTypeId")
-    var urgencTypeId: Int? = null,
+    @Json(name = "urgenceType")
+    var urgenceType: UrgenceTypes? = null,
 
-    @Json(name = "hospitalId")
-    var hospitalId: String? = null,
-
-    @Json(name = "donorId")
-    var donorId: String? = null,
+    @Json(name = "hospital")
+    var hospital: Hospital? = null,
 
     @Json(name = "firstName")
     var firstName: String? = null,
@@ -35,7 +32,7 @@ class BloodRequestsData(
     var lastName: String? = null,
 
     @Json(name = "age")
-    var age: String? = null,
+    var age: Int? = null,
 
     @Json(name = "quantity")
     var quantity: Double? = null,
@@ -50,3 +47,35 @@ class BloodRequestsData(
     var donationTime: Double? = null,
 
     )
+
+class AuthorData(
+    @Json(name = "id")
+    var id: String? = null,
+
+    @Json(name = "name")
+    var name: String? = null
+)
+
+class BloodTypes(
+    @Json(name = "id")
+    var id: Int? = null,
+
+    @Json(name = "type")
+    var type: String? = null
+)
+
+class UrgenceTypes(
+    @Json(name = "id")
+    var id: Int? = null,
+
+    @Json(name = "type")
+    var type: String? = null
+)
+
+class Hospital(
+    @Json(name = "id")
+    var id: Int? = null,
+
+    @Json(name = "type")
+    var type: String? = null
+)

@@ -31,6 +31,7 @@ class MainViewModel @Inject constructor(
     var loading = MutableLiveData<Boolean>()
     var successSignUp = MutableLiveData<GeneralResponse>()
     var successSignIn = MutableLiveData<Boolean>()
+    var postAddedSuccessfully = MutableLiveData<Boolean>()
     var getBloodTypes = MutableLiveData<BloodTypesResponse>()
     var getCities = MutableLiveData<CitiesResponse>()
     var getUrgencetypes = MutableLiveData<DatasResponse>()
@@ -269,6 +270,43 @@ class MainViewModel @Inject constructor(
             .doOnSubscribe { loading.value = true }
             .subscribe({ result ->
                 getChatResponse.value = result
+            }, { error ->
+                error.printStackTrace()
+                errorHandle(error)
+            })
+    }
+
+    fun addPost(
+        bloodTypeId: Int,
+        quantity: Double,
+        urgenceTypeid: Int,
+        hospitalId: Int,
+        donationDate: String,
+        donationTime: String,
+        firstName: String,
+        lastName: String,
+        age: Int
+    ) {
+        disposable = apiService.addBloodRequest(
+            AddEditBloodRequestBody(
+                bloodTypeId = bloodTypeId,
+                quantity = quantity,
+                urgenceTypeId = urgenceTypeid,
+                hospitalId = hospitalId,
+                donationDate = donationDate,
+                donationTime = donationTime,
+                firstName = firstName,
+                lastName = lastName,
+                age = age
+            ),
+            bearerToken
+        )
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnTerminate { loading.value = false }
+            .doOnSubscribe { loading.value = true }
+            .subscribe({ result ->
+                postAddedSuccessfully.value = true
             }, { error ->
                 error.printStackTrace()
                 errorHandle(error)
