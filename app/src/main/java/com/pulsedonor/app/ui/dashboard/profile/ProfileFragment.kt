@@ -3,11 +3,23 @@ package com.pulsedonor.app.ui.dashboard.profile
 import android.app.AlertDialog
 import android.content.Intent
 import android.view.LayoutInflater
+import androidx.lifecycle.ViewModelProvider
 import com.pulsedonor.app.base.fragment.BaseFragment
+import com.pulsedonor.app.base.viewmodel.PulseDonorViewModelFactory
+import com.pulsedonor.app.data.AppPreferences
 import com.pulsedonor.app.databinding.ProfileFragmentBinding
+import com.pulsedonor.app.ui.MainViewModel
 import com.pulsedonor.app.ui.oboarding.intro.IntroductionActivity
+import javax.inject.Inject
 
 class ProfileFragment : BaseFragment<ProfileFragmentBinding>() {
+
+    @Inject
+    lateinit var appPreferences: AppPreferences
+    private lateinit var viewModel: MainViewModel
+
+    @Inject
+    lateinit var viewModelFactory: PulseDonorViewModelFactory
 
     override fun inflateBinding(layoutInflater: LayoutInflater): ProfileFragmentBinding =
         ProfileFragmentBinding.inflate(layoutInflater)
@@ -16,6 +28,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding>() {
     }
 
     override fun initViews() {
+        viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
     }
 
     override fun onClicks() {

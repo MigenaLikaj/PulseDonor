@@ -157,11 +157,22 @@ fun ImageView.loadUrl(url: String, placeholder: Int, loader: ProgressBar?) {
                 loader.visibility = View.GONE
                 return false
             }
-
         }
 
         GlideApp.with(context).load(url).placeholder(placeholder).listener(glideListener)
             .apply(RequestOptions.fitCenterTransform())
             .into(this)
     }
+
+    fun Context.showToast(message: String) {
+        StyleableToast
+            .Builder(this)
+            .text(message)
+            .iconStart(R.mipmap.ic_launcher_round)
+            .textColor(Color.WHITE)
+            .cornerRadius(50)
+            .backgroundColor(this.getColor(R.color.cl_2b2b2b))
+            .show()
+    }
+
 }

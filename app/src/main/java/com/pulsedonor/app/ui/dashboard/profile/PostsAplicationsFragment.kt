@@ -5,15 +5,26 @@ import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pulsedonor.app.adapters.profile.ApplicantsAdapter
 import com.pulsedonor.app.base.fragment.BaseFragment
+import com.pulsedonor.app.base.viewmodel.PulseDonorViewModelFactory
+import com.pulsedonor.app.data.AppPreferences
 import com.pulsedonor.app.databinding.PostsAplicationsFragmentBinding
 import com.pulsedonor.app.models.profile.ApplicantsResponse
+import com.pulsedonor.app.ui.MainViewModel
+import javax.inject.Inject
 
 class PostsApplicationsFragment : BaseFragment<PostsAplicationsFragmentBinding>(),
     ApplicantsAdapter.Listener {
 
+    @Inject
+    lateinit var appPreferences: AppPreferences
+
+    @Inject
+    lateinit var viewModelFactory: PulseDonorViewModelFactory
+    private lateinit var viewModel: MainViewModel
     lateinit var applicantsAdapter: ApplicantsAdapter
     private var applicantsList = ArrayList<ApplicantsResponse?>()
 
@@ -24,6 +35,7 @@ class PostsApplicationsFragment : BaseFragment<PostsAplicationsFragmentBinding>(
     }
 
     override fun initViews() {
+        viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
 
         applicantsAdapter = ApplicantsAdapter(this)
         binding.rvAplicants.apply {

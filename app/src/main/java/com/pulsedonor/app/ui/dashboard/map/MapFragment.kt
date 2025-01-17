@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -25,13 +26,23 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.pulsedonor.app.R
 import com.pulsedonor.app.base.fragment.BaseFragment
+import com.pulsedonor.app.base.viewmodel.PulseDonorViewModelFactory
+import com.pulsedonor.app.data.AppPreferences
 import com.pulsedonor.app.databinding.BsdMapBinding
 import com.pulsedonor.app.databinding.MapFragmentBinding
+import com.pulsedonor.app.ui.MainViewModel
 import java.util.Locale
+import javax.inject.Inject
 
 
 class MapFragment : BaseFragment<MapFragmentBinding>(), OnMapReadyCallback {
 
+    @Inject
+    lateinit var appPreferences: AppPreferences
+
+    @Inject
+    lateinit var viewModelFactory: PulseDonorViewModelFactory
+    private lateinit var viewModel: MainViewModel
     private lateinit var map: GoogleMap
     private val TAG = MapFragment::class.java.simpleName
     private val REQUEST_LOCATION_PERMISSION = 1
@@ -41,6 +52,7 @@ class MapFragment : BaseFragment<MapFragmentBinding>(), OnMapReadyCallback {
         MapFragmentBinding.inflate(layoutInflater)
 
     override fun observeViewModel() {
+        viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
     }
 
     override fun initViews() {

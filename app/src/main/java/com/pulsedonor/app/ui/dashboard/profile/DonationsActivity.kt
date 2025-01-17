@@ -13,6 +13,7 @@ import com.pulsedonor.app.ui.MainViewModel
 import javax.inject.Inject
 
 class DonationsActivity : BaseActivity<DonationsActivityBinding>() {
+
     override fun inflateBinding(layoutInflater: LayoutInflater): DonationsActivityBinding =
         DonationsActivityBinding.inflate(layoutInflater)
 

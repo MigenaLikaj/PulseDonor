@@ -2,15 +2,26 @@ package com.pulsedonor.app.ui.dashboard.home
 
 import android.content.Intent
 import android.view.LayoutInflater
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.pulsedonor.app.base.fragment.BaseFragment
+import com.pulsedonor.app.base.viewmodel.PulseDonorViewModelFactory
+import com.pulsedonor.app.data.AppPreferences
 import com.pulsedonor.app.databinding.HomeFragmentBinding
+import com.pulsedonor.app.ui.MainViewModel
 import com.pulsedonor.app.ui.dashboard.chat.ChatActivity
 import com.pulsedonor.app.ui.dashboard.notifications.NotificationsActivity
+import javax.inject.Inject
 
 class HomeFragment : BaseFragment<HomeFragmentBinding>() {
 
+    @Inject
+    lateinit var appPreferences: AppPreferences
+
+    @Inject
+    lateinit var viewModelFactory: PulseDonorViewModelFactory
+    private lateinit var viewModel: MainViewModel
     private lateinit var vpAdapter: ViewPagerHome
 
     override fun inflateBinding(layoutInflater: LayoutInflater): HomeFragmentBinding =
@@ -20,6 +31,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>() {
     }
 
     override fun initViews() {
+        viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
         initTabLayoutAndViewPager()
     }
 

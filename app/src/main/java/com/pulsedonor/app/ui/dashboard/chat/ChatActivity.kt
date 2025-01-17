@@ -1,14 +1,25 @@
 package com.pulsedonor.app.ui.dashboard.chat
 
 import android.view.LayoutInflater
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pulsedonor.app.adapters.chat.ChatAdapter
 import com.pulsedonor.app.base.activity.BaseActivity
+import com.pulsedonor.app.base.viewmodel.PulseDonorViewModelFactory
+import com.pulsedonor.app.data.AppPreferences
 import com.pulsedonor.app.databinding.ChatActivityBinding
 import com.pulsedonor.app.models.home.ChatsMessagesData
+import com.pulsedonor.app.ui.MainViewModel
+import javax.inject.Inject
 
 class ChatActivity : BaseActivity<ChatActivityBinding>() {
 
+    @Inject
+    lateinit var appPreferences: AppPreferences
+
+    @Inject
+    lateinit var viewModelFactory: PulseDonorViewModelFactory
+    private lateinit var viewModel: MainViewModel
     private lateinit var chatAdapter: ChatAdapter
     private val messagesList = mutableListOf<ChatsMessagesData>()
 
@@ -24,7 +35,8 @@ class ChatActivity : BaseActivity<ChatActivityBinding>() {
     }
 
     override fun observeViewModel() {
-        // Add any ViewModel observation logic here if needed
+        viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
+
     }
 
     override fun onClicks() {

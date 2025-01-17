@@ -10,11 +10,15 @@ import com.pulsedonor.app.base.activity.BaseActivity
 import com.pulsedonor.app.base.viewmodel.PulseDonorViewModelFactory
 import com.pulsedonor.app.data.AppPreferences
 import com.pulsedonor.app.databinding.SignUpActivityBinding
+import com.pulsedonor.app.events.ShowToastEvent
 import com.pulsedonor.app.models.auth.GenderData
 import com.pulsedonor.app.models.datas.BloodTypesData
 import com.pulsedonor.app.ui.MainViewModel
 import com.pulsedonor.app.ui.oboarding.signin.SignInActivity
 import com.pulsedonor.app.utilities.openActivity
+import com.pulsedonor.app.utilities.showToast
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import javax.inject.Inject
 
 class SignUpActivity : BaseActivity<SignUpActivityBinding>() {
@@ -117,4 +121,18 @@ class SignUpActivity : BaseActivity<SignUpActivityBinding>() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        EventBus.getDefault().unregister(this)
+        super.onStop()
+    }
+
+    @Subscribe
+    fun event(showToastEvent: ShowToastEvent) {
+        showToast(showToastEvent.message)
+    }
 }

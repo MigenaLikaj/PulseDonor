@@ -2,6 +2,7 @@ package com.pulsedonor.app.ui.dashboard.hall_of_fame
 
 import android.graphics.Color
 import android.view.LayoutInflater
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.Entry
@@ -13,11 +14,21 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.pulsedonor.app.adapters.hall_of_fame.DonorsAdapter
 import com.pulsedonor.app.base.fragment.BaseFragment
+import com.pulsedonor.app.base.viewmodel.PulseDonorViewModelFactory
+import com.pulsedonor.app.data.AppPreferences
 import com.pulsedonor.app.databinding.HallOfFameFragmentBinding
 import com.pulsedonor.app.models.hall_of_fame.DonorsResponse
+import com.pulsedonor.app.ui.MainViewModel
+import javax.inject.Inject
 
 class HallOfFameFragment : BaseFragment<HallOfFameFragmentBinding>() {
 
+    @Inject
+    lateinit var appPreferences: AppPreferences
+
+    @Inject
+    lateinit var viewModelFactory: PulseDonorViewModelFactory
+    private lateinit var viewModel: MainViewModel
     lateinit var donorsAdapter: DonorsAdapter
     lateinit var topDonorsAdapter: DonorsAdapter
     private var donorsList = ArrayList<DonorsResponse?>()
@@ -27,6 +38,7 @@ class HallOfFameFragment : BaseFragment<HallOfFameFragmentBinding>() {
         HallOfFameFragmentBinding.inflate(layoutInflater)
 
     override fun observeViewModel() {
+        viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
     }
 
     override fun initViews() {
