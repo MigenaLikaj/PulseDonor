@@ -10,7 +10,7 @@ import com.pulsedonor.app.base.fragment.BaseFragment
 import com.pulsedonor.app.base.viewmodel.PulseDonorViewModelFactory
 import com.pulsedonor.app.data.AppPreferences
 import com.pulsedonor.app.databinding.HomePostsFragmentBinding
-import com.pulsedonor.app.models.home.HomePostsResponse
+import com.pulsedonor.app.models.home.BloodRequestsData
 import com.pulsedonor.app.ui.MainViewModel
 import javax.inject.Inject
 
@@ -23,81 +23,34 @@ class HomePostsFragment : BaseFragment<HomePostsFragmentBinding>(), PostsInHomeA
     lateinit var viewModelFactory: PulseDonorViewModelFactory
     private lateinit var viewModel: MainViewModel
     lateinit var postsInHomeAdapter: PostsInHomeAdapter
-    private var postsList = ArrayList<HomePostsResponse?>()
+    private var postsList = ArrayList<BloodRequestsData?>()
+
 
     override fun inflateBinding(layoutInflater: LayoutInflater): HomePostsFragmentBinding =
         HomePostsFragmentBinding.inflate(layoutInflater)
 
-    override fun observeViewModel() {
-        viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
-    }
 
     override fun initViews() {
+        viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
+
         postsInHomeAdapter = PostsInHomeAdapter(this)
         binding.rvPosts.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = postsInHomeAdapter
         }
+        viewModel.getPostsInhome()
+    }
 
-        postsList = arrayListOf(
-            HomePostsResponse(
-                posterName = "John Doe",
-                posterImage = "https://randomuser.me/api/portraits/men/1.jpg",
-                bloodGroup = "A+",
-                quantity = "2 units",
-                urgency = "High",
-                hospital = "City General Hospital",
-                dateTime = "2025-01-14T10:30:00",
-                bloodRecipientAge = 35,
-                bloodRecipientName = "Jane Smith"
-            ),
-            HomePostsResponse(
-                posterName = "Emma Watson",
-                posterImage = "https://randomuser.me/api/portraits/men/2.jpg",
-                bloodGroup = "O-",
-                quantity = "1 unit",
-                urgency = "Medium",
-                hospital = "Sunrise Medical Center",
-                dateTime = "2025-01-14T12:00:00",
-                bloodRecipientAge = 42,
-                bloodRecipientName = "Robert Brown"
-            ),
-            HomePostsResponse(
-                posterName = "Chris Evans",
-                posterImage = "https://randomuser.me/api/portraits/men/3.jpg",
-                bloodGroup = "B+",
-                quantity = "3 units",
-                urgency = "Critical",
-                hospital = "Green Valley Hospital",
-                dateTime = "2025-01-14T15:45:00",
-                bloodRecipientAge = 28,
-                bloodRecipientName = "Lisa White"
-            ),
-            HomePostsResponse(
-                posterName = "Sophia Johnson",
-                posterImage = "https://randomuser.me/api/portraits/women/4.jpg",
-                bloodGroup = "AB-",
-                quantity = "2 units",
-                urgency = "Low",
-                hospital = "Downtown Healthcare",
-                dateTime = "2025-01-14T18:00:00",
-                bloodRecipientAge = 50,
-                bloodRecipientName = "Tom Davis"
-            ),
-            HomePostsResponse(
-                posterName = "Liam Smith",
-                posterImage = "https://randomuser.me/api/portraits/women/4.jpg",
-                bloodGroup = "O+",
-                quantity = "4 units",
-                urgency = "High",
-                hospital = "Saint Mary Hospital",
-                dateTime = "2025-01-14T20:30:00",
-                bloodRecipientAge = 19,
-                bloodRecipientName = "Anna Lee"
-            )
-        )
+    override fun observeViewModel() {
 
-        postsInHomeAdapter.submitList(postsList)
+        viewModel.getPostsInhome.observe(this) {
+            it.data?.let {
+                postsList.clear()
+                postsList.addAll(it)
+                postsInHomeAdapter.submitList(postsList)
+            }
+        }
+
     }
 
     override fun onClicks() {

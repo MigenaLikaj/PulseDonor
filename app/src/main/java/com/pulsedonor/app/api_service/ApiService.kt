@@ -1,6 +1,7 @@
 package com.pulsedonor.app.api_service
 
 import com.pulsedonor.app.models.AddBloodRequest
+import com.pulsedonor.app.models.BloodDonationPointResponse
 import com.pulsedonor.app.models.auth.GeneralResponse
 import com.pulsedonor.app.models.auth.GeneralResponseInt
 import com.pulsedonor.app.models.auth.SignInBody
@@ -100,10 +101,10 @@ interface ApiService {
     ): Observable<ResponseBody>
 
     //bloodDonationPoints
-    @GET("blood-donation-points")
+    @GET("blood-donation-points/GetAll")
     fun getBloodDonationPoints(
         @Header("Authorization") bearerToken: String
-    ): Observable<GetAccountResponse>
+    ): Observable<BloodDonationPointResponse>
 
     @GET("blood-donation-points/{id}")
     fun getBloodDonationPointsById(

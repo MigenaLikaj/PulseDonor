@@ -41,10 +41,10 @@ class BloodRequestsData(
     var postKey: String? = null,
 
     @Json(name = "donationDate")
-    var donationDate: Double? = null,
+    var donationDate: String? = null,
 
     @Json(name = "donationTime")
-    var donationTime: Double? = null,
+    var donationTime: String? = null,
 
     )
 
@@ -77,5 +77,5 @@ class Hospital(
     var id: Int? = null,
 
     @Json(name = "type")
-    var type: String? = null
+    var name: String? = null
 )

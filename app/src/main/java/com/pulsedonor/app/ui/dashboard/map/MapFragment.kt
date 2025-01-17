@@ -30,10 +30,10 @@ import com.pulsedonor.app.base.viewmodel.PulseDonorViewModelFactory
 import com.pulsedonor.app.data.AppPreferences
 import com.pulsedonor.app.databinding.BsdMapBinding
 import com.pulsedonor.app.databinding.MapFragmentBinding
+import com.pulsedonor.app.models.Bloodpoints
 import com.pulsedonor.app.ui.MainViewModel
 import java.util.Locale
 import javax.inject.Inject
-
 
 class MapFragment : BaseFragment<MapFragmentBinding>(), OnMapReadyCallback {
 
@@ -44,39 +44,70 @@ class MapFragment : BaseFragment<MapFragmentBinding>(), OnMapReadyCallback {
     lateinit var viewModelFactory: PulseDonorViewModelFactory
     private lateinit var viewModel: MainViewModel
     private lateinit var map: GoogleMap
+    private var pinlist = ArrayList<Bloodpoints?>()
     private val TAG = MapFragment::class.java.simpleName
     private val REQUEST_LOCATION_PERMISSION = 1
     lateinit var bsdMap: BottomSheetDialog
+    private var long = 0.0
+    private var lat = 0.0
 
     override fun inflateBinding(layoutInflater: LayoutInflater): MapFragmentBinding =
         MapFragmentBinding.inflate(layoutInflater)
 
-    override fun observeViewModel() {
-        viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
-    }
-
     override fun initViews() {
+        viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
+
         val mapFragment = childFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        viewModel.getBloodDonationPoints()
     }
 
-    override fun onClicks() {
+    override fun observeViewModel() {
+        viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
+
+        viewModel.getBloodDonationPoints.observe(this) {
+            it.data?.let { points ->
+                pinlist.clear()
+                pinlist.addAll(points)
+            }
+            updateMapMarkers()
+        }
     }
+
+    private fun updateMapMarkers() {
+        if (::map.isInitialized) {
+            map.clear()
+            pinlist.forEach { bloodpoint ->
+                bloodpoint?.let {
+                    val location = LatLng(it.latitude!!.toDouble(), it.longitude!!.toDouble())
+                    map.addMarker(
+                        MarkerOptions()
+                            .position(location)
+                            .title(it.addesss)
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+                    )
+                }
+            }
+
+            if (pinlist.isNotEmpty()) {
+                val firstLocation = LatLng(
+                    pinlist[0]?.latitude?.toDouble() ?: 0.0,
+                    pinlist[0]?.longitude?.toDouble() ?: 0.0
+                )
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(firstLocation, 15f))
+            }
+        }
+    }
+
+    override fun onClicks() {}
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
         map.mapType = GoogleMap.MAP_TYPE_NORMAL
 
-        val latitude = 42.654237
-        val longitude = 21.162691
-        val zoomLevel = 15f
-        val overlaySize = 100f
-
-        val homeLatLng = LatLng(latitude, longitude)
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(homeLatLng, zoomLevel))
-        map.addMarker(MarkerOptions().position(homeLatLng))
-
+        updateMapMarkers()
         setMapLongClick(map)
         setPoiClick(map)
         setMapStyle(map)
@@ -85,7 +116,6 @@ class MapFragment : BaseFragment<MapFragmentBinding>(), OnMapReadyCallback {
 
     private fun setMapLongClick(map: GoogleMap) {
         map.setOnMapLongClickListener { latLng ->
-            // A Snippet is Additional text that's displayed below the title.
             val snippet = String.format(
                 Locale.getDefault(),
                 "Lat: %1$.5f, Long: %2$.5f",
@@ -111,14 +141,12 @@ class MapFragment : BaseFragment<MapFragmentBinding>(), OnMapReadyCallback {
 
     private fun setMapStyle(map: GoogleMap) {
         try {
-
             val success = map.setMapStyle(
                 MapStyleOptions.loadRawResourceStyle(
                     requireContext(),
                     R.raw.map_style
                 )
             )
-
             if (!success) {
                 Log.e(TAG, "Style parsing failed.")
             }
@@ -127,7 +155,6 @@ class MapFragment : BaseFragment<MapFragmentBinding>(), OnMapReadyCallback {
         }
     }
 
-    // Checks that users have given permission
     private fun isPermissionGranted(): Boolean {
         return ContextCompat.checkSelfPermission(
             requireContext(),
@@ -135,7 +162,6 @@ class MapFragment : BaseFragment<MapFragmentBinding>(), OnMapReadyCallback {
         ) == PackageManager.PERMISSION_GRANTED
     }
 
-    // Checks if users have given their location and sets location enabled if so.
     private fun enableMyLocation() {
         if (isPermissionGranted()) {
             if (ActivityCompat.checkSelfPermission(
@@ -152,7 +178,7 @@ class MapFragment : BaseFragment<MapFragmentBinding>(), OnMapReadyCallback {
         } else {
             ActivityCompat.requestPermissions(
                 requireActivity(),
-                arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION),
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 REQUEST_LOCATION_PERMISSION
             )
         }
@@ -163,7 +189,6 @@ class MapFragment : BaseFragment<MapFragmentBinding>(), OnMapReadyCallback {
         permissions: Array<String>,
         grantResults: IntArray
     ) {
-
         if (requestCode == REQUEST_LOCATION_PERMISSION) {
             if (grantResults.contains(PackageManager.PERMISSION_GRANTED)) {
                 enableMyLocation()
@@ -186,9 +211,7 @@ class MapFragment : BaseFragment<MapFragmentBinding>(), OnMapReadyCallback {
         }
 
         bindingBsd.btnOpenWithGoogleMaps.setOnClickListener {
-            val latitude = "42.654237"
-            val longitude = "21.162691"
-            val uri = "https://www.google.com.tw/maps/place/$latitude,$longitude"
+            val uri = "https://www.google.com.tw/maps/place/$lat,$long"
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
             startActivity(intent)
             bsdMap.dismiss()
@@ -196,10 +219,8 @@ class MapFragment : BaseFragment<MapFragmentBinding>(), OnMapReadyCallback {
         bsdMap.show()
     }
 
-    fun hideSoftKeyboardBottomSheet(view: View) {
-        (requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(
-            view.windowToken,
-            0
-        )
+    private fun hideSoftKeyboardBottomSheet(view: View) {
+        (requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager)
+            .hideSoftInputFromWindow(view.windowToken, 0)
     }
 }

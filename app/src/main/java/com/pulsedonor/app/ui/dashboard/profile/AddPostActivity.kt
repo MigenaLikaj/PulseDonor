@@ -151,7 +151,7 @@ class AddPostActivity : BaseActivity<AddPostActivityBinding>() {
 
         viewModel.postAddedSuccessfully.observe(this) { data ->
             if (data == true) {
-                showToast("Sukses")
+                showToast("Posti u shtua me sukses!")
             }
         }
 

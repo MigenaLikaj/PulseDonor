@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.pulsedonor.app.api_service.ApiService
 import com.pulsedonor.app.data.AppPreferences
+import com.pulsedonor.app.models.BloodDonationPointResponse
 import com.pulsedonor.app.models.auth.GeneralResponse
 import com.pulsedonor.app.models.auth.SignInBody
 import com.pulsedonor.app.models.auth.SignUpBody
@@ -11,6 +12,7 @@ import com.pulsedonor.app.models.auth.SignupDtoResponse
 import com.pulsedonor.app.models.datas.BloodTypesResponse
 import com.pulsedonor.app.models.datas.CitiesResponse
 import com.pulsedonor.app.models.datas.DatasResponse
+import com.pulsedonor.app.models.home.BloodRequestsResponse
 import com.pulsedonor.app.models.profile.AddEditBloodRequestBody
 import com.pulsedonor.app.models.profile.EditAccountBody
 import com.pulsedonor.app.models.profile.GetAccountResponse
@@ -41,6 +43,8 @@ class MainViewModel @Inject constructor(
     var getUserProfileBloodRequests = MutableLiveData<MyPostsResponse>()
     var getBloodRequestByIdAC = MutableLiveData<GetMyPostdetailsData>()
     var getChatResponse = MutableLiveData<GeneralResponse>()
+    var getBloodDonationPoints = MutableLiveData<BloodDonationPointResponse>()
+    var getPostsInhome = MutableLiveData<BloodRequestsResponse>()
 
     fun signUp(
         userName: String,
@@ -307,6 +311,34 @@ class MainViewModel @Inject constructor(
             .doOnSubscribe { loading.value = true }
             .subscribe({ result ->
                 postAddedSuccessfully.value = true
+            }, { error ->
+                error.printStackTrace()
+                errorHandle(error)
+            })
+    }
+
+    fun getBloodDonationPoints() {
+        disposable = apiService.getBloodDonationPoints(bearerToken)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnTerminate { loading.value = false }
+            .doOnSubscribe { loading.value = true }
+            .subscribe({ result ->
+                getBloodDonationPoints.value = result
+            }, { error ->
+                error.printStackTrace()
+                errorHandle(error)
+            })
+    }
+
+    fun getPostsInhome() {
+        disposable = apiService.getBloodRequests(bearerToken)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnTerminate { loading.value = false }
+            .doOnSubscribe { loading.value = true }
+            .subscribe({ result ->
+                getPostsInhome.value = result
             }, { error ->
                 error.printStackTrace()
                 errorHandle(error)

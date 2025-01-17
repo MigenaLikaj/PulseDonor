@@ -6,16 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.pulsedonor.app.R
 import com.pulsedonor.app.databinding.PostInHomeItemBinding
-import com.pulsedonor.app.models.home.HomePostsResponse
-import com.pulsedonor.app.utilities.loadUrl
-import java.text.SimpleDateFormat
-import java.util.Locale
-import java.util.TimeZone
+import com.pulsedonor.app.models.home.BloodRequestsData
 
 class PostsInHomeAdapter(val listener: Listener) :
-    ListAdapter<HomePostsResponse, RecyclerView.ViewHolder>(DiffCallback()) {
+    ListAdapter<BloodRequestsData, RecyclerView.ViewHolder>(DiffCallback()) {
 
     init {
         hasStableIds()
@@ -37,33 +32,31 @@ class PostsInHomeAdapter(val listener: Listener) :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as PostsInHomeItemViewHolder).bind(getItem(position) as HomePostsResponse)
+        (holder as PostsInHomeItemViewHolder).bind(getItem(position) as BloodRequestsData)
     }
 
     inner class PostsInHomeItemViewHolder(val binding: PostInHomeItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("NotifyDataSetChanged", "SimpleDateFormat")
-        fun bind(item: HomePostsResponse) = with(itemView) {
+        fun bind(item: BloodRequestsData) = with(itemView) {
 
-            binding.tvPosterName.text = item.posterName
-            binding.tvUrgency.text = item.urgency
-            binding.tvHospital.text = item.hospital
-            binding.tvQuantity.text = item.quantity
-            binding.tvBloodGroup.text = item.bloodGroup
-            binding.tvBloodRecipientAge.text = item.bloodRecipientAge.toString()
-            binding.tvBloodRecipientName.text = item.bloodRecipientName
-            binding.civPosterImage.loadUrl(
-                item.posterImage, R.drawable.empty_profile, null
-            )
+            binding.tvPosterName.text = item.author?.name
+            binding.tvUrgency.text = item.urgenceType?.type
+            binding.tvHospital.text = item.hospital?.name
+            binding.tvQuantity.text = item.quantity.toString()
+            binding.tvBloodGroup.text = item.bloodType?.type
+            binding.tvBloodRecipientAge.text = item.age.toString()
+            binding.tvBloodRecipientName.text = "${item.firstName} ${item.lastName}"
 
-            val utcDateFormat =
-                SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault()).apply {
-                    timeZone = TimeZone.getTimeZone("UTC")
-                }
-            val date = utcDateFormat.parse(item.dateTime)
-            val localDateFormat = SimpleDateFormat("dd/MM/yyyy-HH:mm", Locale.getDefault())
-            val formattedDayStr = localDateFormat.format(date)
-            binding.tvDateTime.text = formattedDayStr
+//
+//            val utcDateFormat =
+//                SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault()).apply {
+//                    timeZone = TimeZone.getTimeZone("UTC")
+//                }
+//            val date = utcDateFormat.parse(item.dateTime)
+//            val localDateFormat = SimpleDateFormat("dd/MM/yyyy-HH:mm", Locale.getDefault())
+//            val formattedDayStr = localDateFormat.format(date)
+            binding.tvDateTime.text = "${item.donationDate} - ${item.donationTime}"
 
             binding.btnApply.setOnClickListener {
                 listener.onApplyClicked()
@@ -71,16 +64,16 @@ class PostsInHomeAdapter(val listener: Listener) :
         }
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<HomePostsResponse>() {
+    class DiffCallback : DiffUtil.ItemCallback<BloodRequestsData>() {
         override fun areItemsTheSame(
-            oldItem: HomePostsResponse, newItem: HomePostsResponse
+            oldItem: BloodRequestsData, newItem: BloodRequestsData
         ): Boolean {
             return oldItem == newItem
         }
 
         @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(
-            oldItem: HomePostsResponse, newItem: HomePostsResponse
+            oldItem: BloodRequestsData, newItem: BloodRequestsData
         ): Boolean {
             return oldItem == newItem
         }
