@@ -59,7 +59,7 @@ class PostsInHomeAdapter(val listener: Listener) :
             binding.tvDateTime.text = "${item.donationDate} - ${item.donationTime}"
 
             binding.btnApply.setOnClickListener {
-                listener.onApplyClicked()
+                listener.onApplyClicked(item)
             }
         }
     }
@@ -80,6 +80,6 @@ class PostsInHomeAdapter(val listener: Listener) :
     }
 
     interface Listener {
-        fun onApplyClicked()
+        fun onApplyClicked(item: BloodRequestsData)
     }
 }

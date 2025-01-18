@@ -28,6 +28,7 @@
         <activity
             android:name=".ui.dashboard.profile.PostDetailsActivity"
             android:exported="false"
+            android:launchMode="singleTop"
             android:theme="@style/FullScreenActivityTheme" />
         <activity
             android:name=".ui.dashboard.profile.ChangePasswordActivity"

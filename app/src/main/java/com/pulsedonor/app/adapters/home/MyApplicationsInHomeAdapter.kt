@@ -8,13 +8,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.pulsedonor.app.R
 import com.pulsedonor.app.databinding.ApplicationsListItemBinding
-import com.pulsedonor.app.models.home.HomeApplicationsResponse
-import java.text.SimpleDateFormat
-import java.util.Locale
-import java.util.TimeZone
+import com.pulsedonor.app.models.datas.ApplicationData
 
 class MyApplicationsInHomeAdapter :
-    ListAdapter<HomeApplicationsResponse, RecyclerView.ViewHolder>(DiffCallback()) {
+    ListAdapter<ApplicationData, RecyclerView.ViewHolder>(DiffCallback()) {
 
     init {
         hasStableIds()
@@ -36,48 +33,38 @@ class MyApplicationsInHomeAdapter :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as ApplicationsInHomeItemViewHolder).bind(getItem(position) as HomeApplicationsResponse)
+        (holder as ApplicationsInHomeItemViewHolder).bind(getItem(position) as ApplicationData)
     }
 
     inner class ApplicationsInHomeItemViewHolder(val binding: ApplicationsListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("NotifyDataSetChanged", "SimpleDateFormat")
-        fun bind(item: HomeApplicationsResponse) = with(itemView) {
+        fun bind(item: ApplicationData) = with(itemView) {
 
-            binding.tvUrgency.text = item.urgency
-            binding.tvQuantity.text = item.quantity
-            binding.tvBloodGroup.text = item.bloodGroup
+            binding.tvUrgency.text = item.urgence?.urgenceType
+            binding.tvQuantity.text = item.quantity.toString()
+            binding.tvBloodGroup.text = item.bloodType?.bloodType
 
-            val utcDateFormat =
-                SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault()).apply {
-                    timeZone = TimeZone.getTimeZone("UTC")
-                }
-            val date = utcDateFormat.parse(item.dateTime)
-            val localDateFormat = SimpleDateFormat("dd/MM/yyyy-HH:mm", Locale.getDefault())
-            val formattedDayStr = localDateFormat.format(date)
-            binding.tvDateTime.text = formattedDayStr
+            binding.tvDateTime.text = "${item.donationDate} ${item.donationTime}"
 
-            if (item.statustype == 1) {
+            if (item.isAccepted == true) {
                 binding.ivStatus.setImageResource(R.drawable.accept)
-            } else if (item.statustype == 2) {
-                binding.ivStatus.setImageResource(R.drawable.reject)
             } else {
-                binding.ivStatus.setImageResource(R.drawable.clockwise)
+                binding.ivStatus.setImageResource(R.drawable.reject)
             }
-
         }
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<HomeApplicationsResponse>() {
+    class DiffCallback : DiffUtil.ItemCallback<ApplicationData>() {
         override fun areItemsTheSame(
-            oldItem: HomeApplicationsResponse, newItem: HomeApplicationsResponse
+            oldItem: ApplicationData, newItem: ApplicationData
         ): Boolean {
             return oldItem == newItem
         }
 
         @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(
-            oldItem: HomeApplicationsResponse, newItem: HomeApplicationsResponse
+            oldItem: ApplicationData, newItem: ApplicationData
         ): Boolean {
             return oldItem == newItem
         }

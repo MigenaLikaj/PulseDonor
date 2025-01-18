@@ -9,12 +9,14 @@ import com.pulsedonor.app.models.auth.SignUpBody
 import com.pulsedonor.app.models.datas.BloodTypesResponse
 import com.pulsedonor.app.models.datas.CitiesResponse
 import com.pulsedonor.app.models.datas.DatasResponse
+import com.pulsedonor.app.models.datas.HomeApplicationsResponse
 import com.pulsedonor.app.models.hall_of_fame.GroupRequest
 import com.pulsedonor.app.models.home.BloodRequestsResponse
 import com.pulsedonor.app.models.profile.AddEditBloodRequestBody
 import com.pulsedonor.app.models.profile.AddGroupBody
 import com.pulsedonor.app.models.profile.EditAccountBody
 import com.pulsedonor.app.models.profile.GetAccountResponse
+import com.pulsedonor.app.models.profile.GetMyPostApplicationsResponse
 import com.pulsedonor.app.models.profile.GetMyPostdetailsData
 import com.pulsedonor.app.models.profile.JoinGroupBody
 import com.pulsedonor.app.models.profile.MyPostsResponse
@@ -64,7 +66,7 @@ interface ApiService {
         @Path("id") id: Int,
         @Body editBloodRequestBody: AddEditBloodRequestBody,
         @Header("Authorization") bearerToken: String
-    ): Observable<BloodRequestsResponse>
+    ): Observable<GeneralResponseInt>
 
     @DELETE("Account/blood-request/{id}")
     fun deleteBloodRequestAC(
@@ -75,7 +77,7 @@ interface ApiService {
     @GET("Account/user-profile-applications")
     fun getUserProfileApplicationsAC(
         @Header("Authorization") bearerToken: String
-    ): Observable<BloodRequestsResponse>
+    ): Observable<HomeApplicationsResponse>
 
     @GET("Account/application/{id}")
     fun getApplicationsByIdAC(
@@ -208,10 +210,21 @@ interface ApiService {
         @Header("Authorization") bearerToken: String
     ): Observable<GeneralResponse>
 
-    //appy vlood req
-    @POST("blood-request/send-request")
+    @POST("blood-request/apply-for-request/{id}")
     fun applyBloodRequest(
-        @Query("id") id: Int,
+        @Path("id") id: Int,
+        @Header("Authorization") bearerToken: String
+    ): Observable<GeneralResponseInt>
+
+    @GET("Account/{id}/blood-request-applications")
+    fun getBloodReqApplications(
+        @Path("id") id: Int,
+        @Header("Authorization") bearerToken: String
+    ): Observable<GetMyPostApplicationsResponse>
+
+    @PUT("Account/confirm-application/{id}")
+    fun confirmApplication(
+        @Path("id") id: Int,
         @Header("Authorization") bearerToken: String
     ): Observable<GeneralResponseInt>
 

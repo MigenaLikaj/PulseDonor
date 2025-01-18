@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 class BloodRequestsResponse(
 
     @Json(name = "data")
-    var data: List<BloodRequestsData>? = null,
+    var data: List<BloodRequestsData>? = null
 )
 
 class BloodRequestsData(

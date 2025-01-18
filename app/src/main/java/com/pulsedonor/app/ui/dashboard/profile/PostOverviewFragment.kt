@@ -35,6 +35,8 @@ class PostsOverviewFragment(var postId: Int) : BaseFragment<PostOverviewFragment
     var hospitalValue = ""
     var age = 0
     var quantity = 0.0
+    var firstName = ""
+    var lastName = ""
 
     override fun inflateBinding(layoutInflater: LayoutInflater): PostOverviewFragmentBinding =
         PostOverviewFragmentBinding.inflate(layoutInflater)
@@ -53,8 +55,18 @@ class PostsOverviewFragment(var postId: Int) : BaseFragment<PostOverviewFragment
                     quantity = it
                 }
                 it.age?.let {
-                    binding.etAge.setText(it)
+                    binding.etAge.setText(it.toString())
                     age = it
+                }
+
+                it.firstname?.let {
+                    firstName = it
+                    binding.etFirstName.setText(it)
+                }
+
+                it.lastName?.let {
+                    lastName = it
+                    binding.etLastName.setText(it)
                 }
 
                 it.donationDate?.let {
@@ -213,6 +225,10 @@ class PostsOverviewFragment(var postId: Int) : BaseFragment<PostOverviewFragment
             if (age != 0) {
                 age = binding.etAge.editableText.toString().toInt()
             }
+
+            firstName = binding.etFirstName.editableText.toString()
+            lastName = binding.etLastName.editableText.toString()
+
             viewModel.editBloodRequestByIdAC(
                 bloodTypeId,
                 quantity,
@@ -220,6 +236,8 @@ class PostsOverviewFragment(var postId: Int) : BaseFragment<PostOverviewFragment
                 hospitalId,
                 donationDate,
                 donationTime,
+                firstName,
+                lastName,
                 age,
                 postId
             )

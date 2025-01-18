@@ -12,10 +12,12 @@ import com.pulsedonor.app.models.auth.SignupDtoResponse
 import com.pulsedonor.app.models.datas.BloodTypesResponse
 import com.pulsedonor.app.models.datas.CitiesResponse
 import com.pulsedonor.app.models.datas.DatasResponse
+import com.pulsedonor.app.models.datas.HomeApplicationsResponse
 import com.pulsedonor.app.models.home.BloodRequestsResponse
 import com.pulsedonor.app.models.profile.AddEditBloodRequestBody
 import com.pulsedonor.app.models.profile.EditAccountBody
 import com.pulsedonor.app.models.profile.GetAccountResponse
+import com.pulsedonor.app.models.profile.GetMyPostApplicationsResponse
 import com.pulsedonor.app.models.profile.GetMyPostdetailsData
 import com.pulsedonor.app.models.profile.MyPostsResponse
 import com.pulsedonor.app.utilities.errorHandle
@@ -33,18 +35,22 @@ class MainViewModel @Inject constructor(
     var loading = MutableLiveData<Boolean>()
     var successSignUp = MutableLiveData<GeneralResponse>()
     var successSignIn = MutableLiveData<Boolean>()
+    var applyBloodRequestSuccess = MutableLiveData<Boolean>()
     var postAddedSuccessfully = MutableLiveData<Boolean>()
     var getBloodTypes = MutableLiveData<BloodTypesResponse>()
     var getCities = MutableLiveData<CitiesResponse>()
     var getUrgencetypes = MutableLiveData<DatasResponse>()
     var getHospitals = MutableLiveData<DatasResponse>()
     val dataSavedSuccessfully = MutableLiveData<Boolean>()
+    val confirmApplication = MutableLiveData<Boolean>()
     var getUserProfile = MutableLiveData<GetAccountResponse>()
     var getUserProfileBloodRequests = MutableLiveData<MyPostsResponse>()
     var getBloodRequestByIdAC = MutableLiveData<GetMyPostdetailsData>()
     var getChatResponse = MutableLiveData<GeneralResponse>()
     var getBloodDonationPoints = MutableLiveData<BloodDonationPointResponse>()
     var getPostsInhome = MutableLiveData<BloodRequestsResponse>()
+    var getBloodReqApplications = MutableLiveData<GetMyPostApplicationsResponse>()
+    var getUserProfileApplicationsAC = MutableLiveData<HomeApplicationsResponse>()
 
     fun signUp(
         userName: String,
@@ -52,6 +58,7 @@ class MainViewModel @Inject constructor(
         lastname: String,
         password: String,
         email: String,
+        phonenNr: String,
         genderId: Int,
         bloodTypeId: Int,
     ) {
@@ -63,6 +70,7 @@ class MainViewModel @Inject constructor(
                     lastName = lastname,
                     password = password,
                     email = email,
+                    phoneNumber = phonenNr,
                     genderId = genderId,
                     bloodTypeId = bloodTypeId,
                 )
@@ -239,6 +247,8 @@ class MainViewModel @Inject constructor(
         hospitalId: Int,
         donationDate: String,
         donationTime: String,
+        firstName: String,
+        lastName: String,
         age: Int,
         postId: Int
     ) {
@@ -250,7 +260,9 @@ class MainViewModel @Inject constructor(
                 urgenceTypeId = urgenceTypeid,
                 hospitalId = hospitalId,
                 donationDate = donationDate,
-                donationTime = donationDate,
+                donationTime = donationTime,
+                firstName = firstName,
+                lastName = lastName,
                 age = age
             ), bearerToken
         )
@@ -339,6 +351,63 @@ class MainViewModel @Inject constructor(
             .doOnSubscribe { loading.value = true }
             .subscribe({ result ->
                 getPostsInhome.value = result
+            }, { error ->
+                error.printStackTrace()
+                errorHandle(error)
+            })
+    }
+
+
+    fun applyBloodRequest(id: Int) {
+        disposable = apiService.applyBloodRequest(id, bearerToken)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnTerminate { loading.value = false }
+            .doOnSubscribe { loading.value = true }
+            .subscribe({ result ->
+                applyBloodRequestSuccess.value = true
+            }, { error ->
+                error.printStackTrace()
+                errorHandle(error)
+            })
+    }
+
+    fun getBloodReqApplications(id: Int) {
+        disposable = apiService.getBloodReqApplications(id, bearerToken)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnTerminate { loading.value = false }
+            .doOnSubscribe { loading.value = true }
+            .subscribe({ result ->
+                getBloodReqApplications.value = result
+            }, { error ->
+                error.printStackTrace()
+                errorHandle(error)
+            })
+    }
+
+    fun confirmApplication(id: Int) {
+        disposable = apiService.confirmApplication(id, bearerToken)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnTerminate { loading.value = false }
+            .doOnSubscribe { loading.value = true }
+            .subscribe({ result ->
+                confirmApplication.value = true
+            }, { error ->
+                error.printStackTrace()
+                errorHandle(error)
+            })
+    }
+
+    fun getUserProfileApplicationsAC() {
+        disposable = apiService.getUserProfileApplicationsAC(bearerToken)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnTerminate { loading.value = false }
+            .doOnSubscribe { loading.value = true }
+            .subscribe({ result ->
+                getUserProfileApplicationsAC.value = result
             }, { error ->
                 error.printStackTrace()
                 errorHandle(error)

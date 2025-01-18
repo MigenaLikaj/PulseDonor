@@ -362,6 +362,7 @@
                             app:layout_constraintTop_toTopOf="@id/cvProfilePic">
 
                             <TextView
+                                android:id="@+id/tvfullname"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/poppins_medium"
@@ -370,6 +371,7 @@
                                 android:textSize="16sp" />
 
                             <TextView
+                                android:id="@+id/tvBloodtype"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:drawableStart="@drawable/blood_input_icon"
@@ -392,13 +394,14 @@
                                 android:textSize="14sp" />
 
                             <TextView
+                                android:id="@+id/tvPhoneNumber"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:drawableStart="@drawable/phone_input_icon"
                                 android:drawablePadding="7dp"
                                 android:drawableTint="@color/primary"
                                 android:fontFamily="@font/poppins"
-                                android:text="Nr.i telefonit: +383 45 493 413"
+                                android:text="Nr.i telefonit: 045 767 242"
                                 android:textColor="@color/black"
                                 android:textSize="14sp" />
                         </LinearLayout>

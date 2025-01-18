@@ -3,7 +3,7 @@ package com.pulsedonor.app.models.auth
 import com.squareup.moshi.Json
 
 class SignUpBody(
-    
+
     @Json(name = "signupDto")
     var signupDto: SignupDtoResponse? = null
 )
@@ -21,6 +21,9 @@ class SignupDtoResponse(
 
     @Json(name = "email")
     var email: String? = null,
+
+    @Json(name = "phoneNumber")
+    var phoneNumber: String? = null,
 
     @Json(name = "password")
     var password: String? = null,

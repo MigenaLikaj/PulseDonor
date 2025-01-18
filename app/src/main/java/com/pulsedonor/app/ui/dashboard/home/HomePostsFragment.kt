@@ -51,17 +51,21 @@ class HomePostsFragment : BaseFragment<HomePostsFragmentBinding>(), PostsInHomeA
             }
         }
 
+        viewModel.applyBloodRequestSuccess.observe(this) {
+            Toast.makeText(context, "Aplikimi u krye me sukses!", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     override fun onClicks() {
     }
 
-    override fun onApplyClicked() {
+    override fun onApplyClicked(item: BloodRequestsData) {
         val alert = AlertDialog.Builder(requireContext()).setItems(
             arrayOf("A jeni i/e sigurt qe deshironi te aplikoni?")
         ) { _, which -> }
         alert.setCancelable(true).setPositiveButton("Po") { dialog, _ ->
-            Toast.makeText(context, "Aplikimi u krye me sukses!", Toast.LENGTH_SHORT).show()
+            item.id?.let { viewModel.applyBloodRequest(it) }
         }.setNegativeButton("Jo") { dialog, _ ->
             dialog.dismiss()
         }

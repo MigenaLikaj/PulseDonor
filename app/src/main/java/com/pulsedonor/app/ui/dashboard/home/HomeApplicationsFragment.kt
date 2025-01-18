@@ -8,7 +8,7 @@ import com.pulsedonor.app.base.fragment.BaseFragment
 import com.pulsedonor.app.base.viewmodel.PulseDonorViewModelFactory
 import com.pulsedonor.app.data.AppPreferences
 import com.pulsedonor.app.databinding.HomeAplicationsFragmentBinding
-import com.pulsedonor.app.models.home.HomeApplicationsResponse
+import com.pulsedonor.app.models.datas.ApplicationData
 import com.pulsedonor.app.ui.MainViewModel
 import javax.inject.Inject
 
@@ -21,51 +21,35 @@ class HomeApplicationsFragment : BaseFragment<HomeAplicationsFragmentBinding>() 
     lateinit var viewModelFactory: PulseDonorViewModelFactory
     private lateinit var viewModel: MainViewModel
     lateinit var myApplicationsInHomeAdapter: MyApplicationsInHomeAdapter
-    private var applicationsList = ArrayList<HomeApplicationsResponse?>()
+    private var applicationsList = ArrayList<ApplicationData?>()
 
 
     override fun inflateBinding(layoutInflater: LayoutInflater): HomeAplicationsFragmentBinding =
         HomeAplicationsFragmentBinding.inflate(layoutInflater)
 
-    override fun observeViewModel() {
-        viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
-    }
-
     override fun initViews() {
+        viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
+        viewModel.getUserProfileApplicationsAC()
+
         myApplicationsInHomeAdapter = MyApplicationsInHomeAdapter()
         binding.rvApplications.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = myApplicationsInHomeAdapter
         }
 
-        applicationsList = arrayListOf(
-            HomeApplicationsResponse(
-                id = 1,
-                bloodGroup = "A+",
-                quantity = "2 units",
-                urgency = "High",
-                dateTime = "2025-01-14T10:30:00",
-                statustype = 1,
-            ),
-            HomeApplicationsResponse(
-                id = 2,
-                bloodGroup = "O-",
-                quantity = "1 unit",
-                urgency = "Medium",
-                dateTime = "2025-01-14T12:00:00",
-                statustype = 2,
-            ),
-            HomeApplicationsResponse(
-                id = 3,
-                bloodGroup = "B+",
-                quantity = "3 units",
-                urgency = "Critical",
-                dateTime = "2025-01-14T15:45:00",
-                statustype = 3,
-            )
-        )
-        myApplicationsInHomeAdapter.submitList(applicationsList)
     }
+
+    override fun observeViewModel() {
+
+        viewModel.getUserProfileApplicationsAC.observe(this) {
+            it.data?.let {
+                applicationsList.clear()
+                applicationsList.addAll(it)
+                myApplicationsInHomeAdapter.submitList(applicationsList)
+            }
+        }
+    }
+
 
     override fun onClicks() {
     }

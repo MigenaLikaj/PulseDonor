@@ -24,11 +24,19 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding>() {
     override fun inflateBinding(layoutInflater: LayoutInflater): ProfileFragmentBinding =
         ProfileFragmentBinding.inflate(layoutInflater)
 
-    override fun observeViewModel() {
-    }
 
     override fun initViews() {
         viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
+    }
+
+    override fun observeViewModel() {
+
+        viewModel.getUserProfile.observe(this) { userProfileData ->
+            userProfileData.data?.let {
+                binding.tvUsername.text = "${it.firstName} ${it.lastName}"
+                binding.tvEmail.text = appPreferences.email
+            }
+        }
     }
 
     override fun onClicks() {
@@ -63,5 +71,10 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding>() {
         binding.clChangePassword.setOnClickListener {
             startActivity(Intent(requireContext(), ChangePasswordActivity::class.java))
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getUserProfile()
     }
 }

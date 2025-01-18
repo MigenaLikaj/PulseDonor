@@ -40,7 +40,7 @@ class SignUpActivity : BaseActivity<SignUpActivityBinding>() {
     var lastName = ""
     var email = ""
     var password = ""
-
+    var phoneNumber = "string"
 
     override fun inflateBinding(layoutInflater: LayoutInflater): SignUpActivityBinding =
         SignUpActivityBinding.inflate(layoutInflater)
@@ -128,7 +128,16 @@ class SignUpActivity : BaseActivity<SignUpActivityBinding>() {
             email = binding.etEmail.editableText.toString()
             password = binding.etPassword.editableText.toString()
             val userName = "$firstName $lastName"
-            viewModel.signUp(userName, firstName, lastName, password, email, genderId, bloodTypeId)
+            viewModel.signUp(
+                userName,
+                firstName,
+                lastName,
+                password,
+                email,
+                phoneNumber,
+                genderId,
+                bloodTypeId
+            )
         }
     }
 

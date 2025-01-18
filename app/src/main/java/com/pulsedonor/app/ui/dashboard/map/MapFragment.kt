@@ -82,6 +82,8 @@ class MapFragment : BaseFragment<MapFragmentBinding>(), OnMapReadyCallback {
             pinlist.forEach { bloodpoint ->
                 bloodpoint?.let {
                     val location = LatLng(it.latitude!!.toDouble(), it.longitude!!.toDouble())
+                    lat = it.latitude?.toDouble()!!
+                    long = it.longitude?.toDouble()!!
                     map.addMarker(
                         MarkerOptions()
                             .position(location)

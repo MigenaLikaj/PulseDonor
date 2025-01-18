@@ -36,7 +36,7 @@ class PostDetailsActivity : BaseActivity<PostDetailsActivityBinding>() {
 
     override fun onClicks() {
         binding.ivBack.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
+            finish()
         }
     }
 
@@ -53,6 +53,7 @@ class PostDetailsActivity : BaseActivity<PostDetailsActivityBinding>() {
     private fun initTabLayoutAndViewPager(postId: Int) {
         vpAdapter = ViewPagerPosts(supportFragmentManager, lifecycle, postId)
         binding.vpRanking.adapter = vpAdapter
+        vpAdapter.notifyDataSetChanged()
 
         TabLayoutMediator(binding.tabLayout, binding.vpRanking) { tab, position ->
             tab.text = when (position) {
@@ -69,4 +70,5 @@ class PostDetailsActivity : BaseActivity<PostDetailsActivityBinding>() {
             }
         })
     }
+
 }

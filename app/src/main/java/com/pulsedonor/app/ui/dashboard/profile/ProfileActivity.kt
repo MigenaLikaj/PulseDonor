@@ -40,14 +40,13 @@ class ProfileActivity : BaseActivity<ProfileActivityBinding>() {
         binding.etEmail.setText(appPreferences.email)
         email = appPreferences.email.toString()
         viewModel.getUserProfile()
-        viewModel.getCities()
-        viewModel.getBloodTypes()
     }
 
     override fun observeViewModel() {
 
         viewModel.getUserProfile.observe(this) { userProfileData ->
             userProfileData.data?.let {
+                viewModel.getCities()
                 it.firstName?.let {
                     binding.etFirstName.setText(it)
                     firstName = it
@@ -56,6 +55,7 @@ class ProfileActivity : BaseActivity<ProfileActivityBinding>() {
                     binding.etLastName.setText(it)
                     lastName = it
                 }
+                binding.tvfullname.text = "$firstName $lastName"
                 it.bloodType?.let {
                     it.bloodTypeId?.let {
                         bloodTypeId = it
@@ -63,6 +63,7 @@ class ProfileActivity : BaseActivity<ProfileActivityBinding>() {
                     it.type?.let {
                         bloodTypeValue = it
                         binding.actvBloodGroup.setText(it)
+                        binding.tvBloodtype.text = it
                     }
                 }
                 it.primaryCity?.let {
@@ -78,10 +79,9 @@ class ProfileActivity : BaseActivity<ProfileActivityBinding>() {
         }
 
         viewModel.dataSavedSuccessfully.observe(this) { saved ->
-            saved?.let {
-                if (it) {
-                    showToast("Data has been updated successfully!")
-                }
+            if (saved) {
+                showToast("Te dhenat u perditsuan me sukses!")
+
             }
         }
 
@@ -90,6 +90,28 @@ class ProfileActivity : BaseActivity<ProfileActivityBinding>() {
                 bloodTypesList.clear()
                 bloodTypesList.addAll(data)
             }
+            val bloodTypeName = bloodTypesList.map { it.text }
+            val genderAdapter = ArrayAdapter(
+                this,
+                R.layout.simple_dropdown_item_1line,
+                bloodTypeName
+            )
+
+            binding.actvBloodGroup.setAdapter(genderAdapter)
+            binding.actvBloodGroup.threshold = 1
+            binding.actvBloodGroup.onItemClickListener =
+                AdapterView.OnItemClickListener { parent, view, position, id ->
+                    val selectedbloodTypeName = parent.getItemAtPosition(position) as String
+                    val selectedbloodType = bloodTypesList.find {
+                        it.text?.trim().equals(selectedbloodTypeName.trim(), ignoreCase = true)
+                    }
+                    val bloodTypeId =
+                        selectedbloodType?.value?.toIntOrNull() ?: -1 // Safe conversion to Int
+                    val bloodTypeText = selectedbloodType?.text.orEmpty()
+
+                    binding.actvBloodGroup.setText(bloodTypeText)
+                    this.bloodTypeId = bloodTypeId
+                }
         }
 
         viewModel.getCities.observe(this) { response ->
@@ -97,6 +119,32 @@ class ProfileActivity : BaseActivity<ProfileActivityBinding>() {
                 citiesList.clear()
                 citiesList.addAll(data)
             }
+
+            val citiesName = citiesList.map { it.text }
+            val cityAdapter = ArrayAdapter(
+                this,
+                R.layout.simple_dropdown_item_1line,
+                citiesName
+            )
+
+            binding.actvCity.setAdapter(cityAdapter)
+            binding.actvCity.threshold = 1
+            binding.actvCity.onItemClickListener =
+                AdapterView.OnItemClickListener { parent, view, position, id ->
+                    val selectedCityName = parent.getItemAtPosition(position) as String
+                    val selectedCity = citiesList.find {
+                        it.text?.trim().equals(selectedCityName.trim(), ignoreCase = true)
+                    }
+                    val hospitalId =
+                        selectedCity?.value?.toIntOrNull() ?: -1 // Safe conversion to Int
+                    val hospitalTypeText = selectedCity?.text.orEmpty()
+
+                    binding.actvCity.setText(hospitalTypeText)
+                    this.primaryCityId = hospitalId
+
+                }
+
+            viewModel.getBloodTypes()
         }
     }
 
@@ -104,42 +152,6 @@ class ProfileActivity : BaseActivity<ProfileActivityBinding>() {
         binding.ivBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
-
-        val bloodTypeName = bloodTypesList.map { it.text }
-        val genderAdapter = ArrayAdapter(
-            this,
-            R.layout.simple_dropdown_item_1line,
-            bloodTypeName
-        )
-
-        binding.actvBloodGroup.setAdapter(genderAdapter)
-        binding.actvBloodGroup.threshold = 1
-        binding.actvBloodGroup.onItemClickListener =
-            AdapterView.OnItemClickListener { parent, view, position, id ->
-                val selectedbloodTypeName = parent.getItemAtPosition(position) as String
-                val selectedbloodType =
-                    bloodTypesList.find { it.value == selectedbloodTypeName }
-                bloodTypeId = selectedbloodType?.value?.toInt() ?: -1
-                binding.actvBloodGroup.setText(selectedbloodType?.text)
-            }
-
-        val citiesName = bloodTypesList.map { it.text }
-        val cityAdapter = ArrayAdapter(
-            this,
-            R.layout.simple_dropdown_item_1line,
-            citiesName
-        )
-
-        binding.actvCity.setAdapter(cityAdapter)
-        binding.actvCity.threshold = 1
-        binding.actvCity.onItemClickListener =
-            AdapterView.OnItemClickListener { parent, view, position, id ->
-                val selectedCityName = parent.getItemAtPosition(position) as String
-                val selectedCity =
-                    citiesList.find { it.value == selectedCityName }
-                primaryCityId = selectedCity?.value?.toInt() ?: -1
-                binding.actvCity.setText(selectedCity?.text)
-            }
 
         binding.btnSave.setOnClickListener {
             firstName = binding.etFirstName.editableText.toString().trim()
